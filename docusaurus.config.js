@@ -4,6 +4,42 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import {themes as prismThemes} from 'prism-react-renderer';
+import fs from 'fs';
+
+function getFirstPageFromJson(filePath, sectionName) {
+  try {
+    // Read the JSON file
+    const data = fs.readFileSync(filePath, 'utf8');
+
+    // Parse the JSON data
+    const jsonData = JSON.parse(data).sidebar;
+
+    // Check if the section exists in the JSON data
+    if (jsonData[sectionName]) {
+      // Get the first category in the section
+      const firstCategory = jsonData[sectionName][0];
+      
+      if (firstCategory) {
+        // Check if the first category has pages
+        const firstPage = firstCategory.pages[0];
+        
+        if (firstPage) {
+          // Return the first page or page object
+          if (typeof firstPage === 'string') {
+            return firstPage;
+          } else if (typeof firstPage === 'object' && firstPage.page) {
+            return firstPage.page;
+          }
+        }
+      }
+    }
+    // If no page is found, return null or undefined
+    return null;
+  } catch (error) {
+    console.error('Error reading or parsing JSON file:', error);
+    return null;
+  }
+}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -99,7 +135,7 @@ const config = {
             position: 'left',
             label: 'Guides',
             className: 'guides_btn',
-            docId: 'getting-started/what-is-deets',
+            docId: getFirstPageFromJson('./config.json', 'docs'),
           },
           //{to: '/blog', label: 'Blog', position: 'left'},
           {
