@@ -5,6 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "prestart": "node createSidebar.js",
+    "prebuild": "node createSidebar.js",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
