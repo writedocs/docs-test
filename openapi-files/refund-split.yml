@@ -1,0 +1,211 @@
+openapi: 3.1.0
+info:
+  title: Refund Split Payment
+  version: 1.0.0
+servers:
+  - url: https://test.digitzsapi.com/test
+tags:
+    - name: Authorization
+    - name: Payments
+    - name: Merchants
+components:
+  schemas:
+    data:
+      type: object
+      description: A key for grouping different types of API data.
+    APIcallType:
+      type: string
+      description: This API call type. This call must be `auth`.
+      default: auth
+    attributes:
+      type: object
+      description: A key for grouping data.
+    appId:
+      type: string
+      description: Supplied by Digitzs on onboarding.
+    appKey:
+      type: string
+      description: The key used to create an appToken with `/auth/token`.
+    appToken:
+      type: string
+      description: The `Authorization` header value to use for most API calls.
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: x-api-key
+security:
+  - sec0: []
+paths:
+  /payments:
+    post:
+      summary: Refund Split Payments
+      operationId: refund-split-payments
+      description: >-
+        Use this endpoint to split a refund of a split payment.
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: A key for grouping different types of API data.
+                  properties:
+                    type:
+                      type: string
+                      example: payments
+                      description: The type of transaction.
+                    attributes:
+                      type: object
+                      description: A key for grouping payment identification data.
+                      properties:
+                        paymentType:
+                          type: string
+                          description: >-
+                            The type of payment transaction.
+                          enum:
+                            - cardSplitRefund
+                          example: cardSplitRefund
+                        merchantId:
+                          type: string
+                          example: "{{merchantId}}"
+                          description: The merchant account number.
+                        miscData:
+                          type: string
+                          description: Optional additional information to store with the call (optional).
+                        transaction:
+                          type: object
+                          description: >-
+                            A key for grouping payment transaction data.
+                            **Required for all payment types except `secondSplit`**.
+                          properties:
+                            amount:
+                              type: string
+                              example: "500"
+                              description: The transaction amount in cents.
+                            currency:
+                              type: string
+                              example: USD
+                              description: The three-character code.
+                            invoice:
+                              type: string
+                              example: "123456"
+                              description: The invoice number for the transaction.
+                        split:
+                          type: object
+                          description: A key for grouping split information.
+                          properties:
+                            merchantId:
+                              type: string
+                              example: "{{merchantId2}}"
+                              description: The merchant ID for the split transaction.
+                            amount:
+                              type: string
+                              example: "100"
+                              description: The amount to be split in cents.
+                        originalSplit:
+                          type: object
+                          description: A key for referencing the original payment to be refunded.
+                          properties:
+                            id:
+                              type: string
+                              example: "{{splitpaymentId}}"
+                              description: The transaction ID to be refunded.
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                      "links": {
+                        "self": "x"
+                      },
+                      "data": {
+                        "type": "payments",
+                        "id": "{paymentId}",
+                        "attributes": {
+                          "paymentType": "cardSplitRefund",
+                          "transaction": {
+                            "code": "0",
+                            "message": "Success",
+                            "amount": "500",
+                            "invoice": "123456",
+                            "currency": "USD",
+                            "authCode": "A11111",
+                            "avsResult": "T",
+                            "gross": "500",
+                            "net": "450",
+                            "grossMinusNet": "50",
+                            "fee": "35",
+                            "rate": "2.95"
+                          }
+                        }
+                      }
+                    }
+              schema:
+                type: object
+                properties:
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL for the current resource.
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: The type of transaction.
+                      id:
+                        type: string
+                        description: The payment transaction identification code.
+                      attributes:
+                        type: object
+                        description: A key for grouping payment identification data.
+                        properties:
+                          paymentType:
+                            type: string
+                            description: The application key.
+                          transaction:
+                            type: object
+                            description: A key for grouping payment identification data.
+                            properties:
+                              code:
+                                type: string
+                                description: The banking entity response code.
+                              message:
+                                type: string
+                                description: The status of the transaction.
+                              amount:
+                                type: string
+                                description: The transaction amount in dollars and cents.
+                              invoice:
+                                type: string
+                                description: The invoice number for the transaction.
+                              currency:
+                                type: string
+                                description: The currency used for the transaction.
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true
