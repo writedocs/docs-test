@@ -1,0 +1,28 @@
+---
+id: create-a-token
+title: Create a Token
+slug: create-a-token
+description: Securely create payment tokens using Deets iFrame. Learn to capture and tokenize sensitive data seamlessly during your checkout process.
+---
+
+import CustomImage from '@site/src/components/CustomImage';
+
+To create tokens used to create payment, you will use Deets iFrame. The iFrame is designed to handle sensitive data securely during the merchant software platform checkout. Even though the checkout form and the iFrame are hosted on your server, the crucial data input is seamlessly replaced by the iFrame, which then tokenizes the data, ensuring a secure transmission to Deets' server following state and federal consumer protection laws. 
+
+<CustomImage 
+  src="img/docs/integration/create-a-token.png"
+  alt="Create a token" 
+/>
+
+## How Deets iFrame works
+
+Once Deets iFrame is embedded in the checkout fields, it captures and tokenizes the customer's sensitive data, including credit card information. The token is then stored in Deet's servers for future or recurring use. Since the sensitive data is tokenized without entering your system or servers, your business is removed from the PCI-compliance scope, as you do not handle your clients' data directly.
+
+## How to use the iFrame
+
+To integrate Deets iFrame into your system, you need to complete two steps:
+
+1. [Create an iFrame configuration object](/integration/iframe-configuration-object)
+2. [Integrate the iFrame into your form](/integration/integrating-deets-iframe)
+
+Follow the guides above for a simple and fast iFrame integration. In addition, you have the option to personalize the iFrame appearance. Read [Styling the iFrame](/integration/styling-the-iframe) for more information.
