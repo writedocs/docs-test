@@ -1,0 +1,106 @@
+---
+id: events
+title: Events
+slug: events
+description: Explore how to handle iFrame events in Deets. Learn to connect and manage event objects for a seamless integration experience.
+---
+
+The iFrame produces event objects, each carrying properties pertinent to the specific message or event type. To associate one or more of these events with your iFrame instance, establish a connection on the iFrame object. This connection is created through the `on()` function, where you provide a callback function to handle the events.
+
+```javascript
+deets.on('tokenize', (token) => {
+  // Modify to collect and send the token to your server
+  console.log(token);
+})
+```
+
+## Event List
+
+The following is a table listing all the possible events to be passed through the `on()` function:
+
+| Event          | Raise Condition(s)                                                                                                                                                                                                                       |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| load           | The iFrame has loaded.                                                                                                                                                                                                                   |
+| focus          | The input in the iFrame gains focus.                                                                                                                                                                                                     |
+| blur           | The input in the iFrame loses focus.                                                                                                                                                                                                     |
+| change         | The input value has changed. Raised only if the data between the most recent focus and blur events has changed.                                                                                                                          |
+| cardTypeChange | The possible card type entered by the user has changed.                                                                                                                                                                                  |
+| error          | An error occurred during the invocation of a command.                                                                                                                                                                                    |
+| validate       | The validate command was invoked directly by the user or as part of the Tokenize command                                                                                                                                                 |
+| tokenize       | The tokenize command was invoked                                                                                                                                                                                                         |
+| cvvFocus       | The input in the CVV iFrame gains focus.                                                                                                                                                                                                 |
+| cvvBlur        | The input in the CVV iFrame loses focus.                                                                                                                                                                                                 |
+| notice         | Raised when the iFrame is loaded by providing an expiration date time stamp as yyyyMMddHHmmss in UTC (current time + 20 mins) and a second notice one minute before expiration. It also provides 3DS Fingerprinting event notifications. |
+| expired        | Raised when the IFrame has expired.                                                                                                                                                                                                      |
+| toggleMask     | The toggleMask command was invoked.                                                                                                                                                                                                      |
+| toggleCvvMask  | The toggleCvvMask command was invoked.                                                                                                                                                                                                   |
+
+The sections below describe the object fields for some of the events.
+
+### Validate
+
+The Validate event returns a different body depending on the validation result. You can find some examples here:
+
+```javascript
+Valid:
+{"isValid":true,"cardType":"masterCard","lastFour":"5454","firstSix":"545454"}  
+
+Invalid input data/failed validation:  
+{"isValid":false,"validator":"format"}  
+
+User did not supply any data:  
+{"isValid":false,"validator":"required"}  
+```
+
+The following table presents all possible parameters in the body object.
+
+| Field      | Type   | Description                                                                                                                                                       |
+| ---------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| isValid    | bool   | Indicates whether or not the input data is valid                                                                                                                  |
+| cardType   | string | The type of credit card. Valid return values are 'masterCard', 'americanExpress', 'discover', 'visa', 'diners', or 'jcb'. See Card Type Validation Regexes below. |
+| lastFour   | string | The last four characters of the input data                                                                                                                        |
+| firstSix   | string | The first six characters of the input data                                                                                                                        |
+| validator  | string | If isValid is false, this will list the validator(s) that failed                                                                                                  |
+| isCvvValid | bool   | Indicates whether or not the CVV input data is valid                                                                                                              |
+
+### Tokenize
+
+ When the Tokenize event is called and all validations are successful, the event will return the token's body. Below is an example using a test card with the number `5454 5454 5454 5454` and the CVV `999`.
+
+```javascript
+{
+"cardType": "masterCard"
+"cvvIncluded": true
+"firstSix": "545454"
+"lastFour": "5454"
+"referenceNumber": "23121917411368702449"
+"token": "545454Wr2Z4Y5454"  // This is the Token ID to include in the Backend API call
+"tokenHMAC": "DGqYCCvGR4k+azJjHFfMDGzRxUqNTrOOQYy6Q/IgLSI="
+}
+```
+
+The following table presents all possible parameters in the body object.
+
+| Field           | Type   | Description                                                                                                                                             |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| firstSix        | string | The first six characters of the input data                                                                                                              |
+| lastFour        | string | The last four characters of the input data                                                                                                              |
+| firstEight      | string | The first eight characters of the input data. Returned only if useExtendedBIN is true in the iFrame configuration and the PAN is 16 characters or more. |
+| cardType        | string | The type of credit card. Valid return values are 'masterCard', 'americanExpress', 'discover', 'visa', 'diners', or 'jcb'                                |
+| characterCount  | int    | The number of characters within the input data                                                                                                          |
+| token           | string | The token generated from the provided data                                                                                                              |
+| referenceNumber | long   | The reference number for the tokenization call                                                                                                          |
+| tokenHMAC       | string | The HMAC generated using the Token as the data and the Client Secret Key                                                                                |
+
+### Error
+
+| Field           | Type   | Description                                                                           |
+| --------------- | ------ | ------------------------------------------------------------------------------------- |
+| error           | string | Description of the error(s) that occurred during the execution of the invoked command |
+| referenceNumber | long   | The reference number for the invoked command                                          |
+
+### ToggleMask and ToggleCvvMask
+
+| Field       | Type | Description                                                            |
+| ----------- | ---- | ---------------------------------------------------------------------- |
+| inputMasked | bool | The toggled state of the input, indicating whether it is masked or not |
