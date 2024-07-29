@@ -1,0 +1,281 @@
+---
+id: integrating-deets-iframe
+title: Integrating Deets iFrame
+slug: integrating-deets-iframe
+description: Integrate Deets iFrame seamlessly into your application. Follow detailed steps for importing the library and setting it up in various environments.
+---
+
+import CustomImage from '@site/src/components/CustomImage';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+To integrate Deets iFrame, you need to import the library and initialize the iFrame. On this page, you find all the steps to integrate the integration. In addition, you can check one of the integration use cases:
+
+- [Plain HTML or Server-Side Rendered HTML Page](#plain-html-or-server-side-rendered-html-page)
+- [Inline Script in HTML](#inline-script-in-html)
+- [Webpack/Vite App](#webpackvite-app)
+
+## Integration Steps
+
+The following sections cover the essential steps to integrate Deets into your application.
+
+### 1. Import Deets Library
+
+To start, you have to import the Deets library into your project. Deets provides two URLs you can use depending on your current integration stage. If you are testing the integration, use the Staging URL. After finishing the testing phase, you need to update the URL used to import the Deets Production library. The following code block presents how to import the Deets library.
+
+<Tabs>
+  <TabItem value="staging" label="Staging URL" default>
+    ```javascript showLineNumbers
+    import Deets from 'https://checkout.v3staging.digitzs.com/api.js'
+    ```
+  </TabItem>
+  <TabItem value="production" label="Production URL">
+    ```javascript showLineNumbers
+    import Deets from 'https://checkout.v3.digitzs.com/api.js'
+    ```
+  </TabItem>
+</Tabs>
+
+:::info Staging and Production URLs
+
+Use the Staging URL to test the integration. No real payment information is used, nor are live payments made under it. Avoid using real data while using the Staging URL.
+
+After moving to Production, all requests will use real data.
+
+:::
+
+To import the Deets library within an HTML file, include the following script tag:
+
+<Tabs>
+  <TabItem value="staging" label="HTML (Staging URL)" default>
+    ```html showLineNumbers
+    <script type="module">
+      import Deets from 'https://checkout.v3staging.digitzs.com/api.js';
+    </script>
+    ```
+  </TabItem>
+  <TabItem value="production" label="HTML (Production URL)">
+  
+    ```html showLineNumbers
+    <script type="module">
+      import Deets from 'https://checkout.v3.digitzs.com/api.js';
+    </script>
+    ```
+  </TabItem>
+</Tabs>
+
+### 2. Configuring the iFrame
+
+Next, you need to set up the iFrame configuration to suit your application needs. Access the [iFrame Configuration Object](/integration/iframe-configuration-object) page for more information. Below is an example configuration:
+
+```javascript showLineNumbers
+var iframeConfig = {
+  origin: "http://127.0.0.1:8080", // The top-level origin URI
+  enablePrettyFormat: true, // Change to false if you want to do your own formatting
+  placeholder: "XXXX-XXXX-XXXX-XXXX",
+  cvvPlaceholder: "XXX",
+  debug: true,
+};
+```
+
+### 3. Initializing the Deets iFrame
+
+To initialize the Deets iFrame, define the card and CVV div IDs and create a new Deets instance: 
+
+```javascript showLineNumbers
+const cardDiv = 'card'; // Card div ID
+const cvvDiv = 'cvv'; // CVV div ID
+
+const deets = new Deets(iframeConfig, cardDiv, cvvDiv);
+```
+
+### 4. Configuring Event Handling
+
+The Deets library emits the tokenize event when the user has successfully entered their payment information and securely tokenized it. You can set up the event handling to send the token to your server, for example. You can use this token to perform new payments in the future for your clients. The following code block presents an example of how you can configure the event handler:
+
+```javascript showLineNumbers
+deets.on('tokenize', (token) => {
+  // Modify to collect and send the token to your server
+  console.log(token);
+});
+
+```
+
+### 5. Handling Form Submission
+
+The last configuration you should add is to handle the form submission when your client finishes adding the payment information. The code block below presents an example of how to define a form submission handler to tokenize and validate the card details:
+
+```javascript showLineNumbers
+function submitHandler(event) {
+  console.log("submitHandler called");
+  event.preventDefault();
+  deets.tokenize();
+  deets.validate(); // Will trigger error styling
+  // deets.on('validate', {func}) can be used to add your own code
+}
+
+const form = document.querySelector("#card_form");
+form.addEventListener('submit', submitHandler);
+```
+
+Notice that the `submitHandler` function performs tokenization and information validation using the Deets library.
+
+## Plain HTML or Server-Side Rendered HTML Page
+
+The following code block presents how to set up a checkout page using plain HTML or server-side rendered HTML, such as PHP and Ruby on Rails. While the HTML file creates a basic checkout and imports the external JavaScript file, the JavaScript file initializes the Deets iFrames, configures the event listeners, and the form submission handler. 
+
+<Tabs>
+  <TabItem value="html-file" label="HTML File" default>
+    ```html showLineNumbers
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Checkout</title>
+      <!-- Other scripts and code -->
+      <script type="module" src="./checkout.js"></script>
+    </head>
+    <body>
+      <form id="card_form" action="/">
+        <input name="first_name" placeholder="First Name"/>
+        <input name="last_name" placeholder="Last Name"/>
+        <div id="card"></div>
+        <div id="cvv"></div>
+        <button type="submit" id="formSubmitBtn">Submit</button>
+      </form>
+    </body>
+    </html>
+    ```
+  </TabItem>
+  <TabItem value="javascript-file" label="JavaScript File">
+  
+    ```javascript showLineNumbers
+    import Deets from 'https://checkout.v3staging.digitzs.com/api.js';
+
+    var iframeConfig = {
+      origin: "http://127.0.0.1:8080", // The top-level origin URI
+      enablePrettyFormat: true, // Change to false if you want to do your own formatting
+      placeholder: "XXXX-XXXX-XXXX-XXXX",
+      cvvPlaceholder: "XXX",
+      debug: true,
+    };
+
+    const cardDiv = 'card';
+    const cvvDiv = 'cvv';
+
+    const deets = new Deets(iframeConfig, cardDiv, cvvDiv);
+
+    deets.on('tokenize', (token) => {
+      // Modify to collect and send the token to your server
+      console.log(token);
+    });
+
+    function submitHandler(event) {
+      event.preventDefault();
+      deets.tokenize();
+      deets.validate(); // Will trigger error styling
+      // Your form submission code
+    }
+
+    const form = document.querySelector("#card_form");
+    form.addEventListener('submit', submitHandler);
+    ```
+  </TabItem>
+</Tabs>
+
+## Inline Script in HTML
+
+This integration approach is ideal for quickly prototyping a page without managing multiple files. It's suitable for small or simple applications or to minimize the setup process and keep everything in one place.
+
+```html showLineNumbers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <!-- Other scripts and code -->
+  <script type="module">
+    import Deets from 'https://checkout.v3staging.digitzs.com/api.js';
+
+    var iframeConfig = {
+      origin: "http://127.0.0.1:8080", // The top-level origin URI
+      enablePrettyFormat: true, // Change to false if you want to do your own formatting
+      placeholder: "XXXX-XXXX-XXXX-XXXX",
+      cvvPlaceholder: "XXX",
+      debug: true,
+    };
+
+    const cardDiv = 'card'; // Card div ID
+    const cvvDiv = 'cvv'; // CVV div ID
+
+    const deets = new Deets(iframeConfig, cardDiv, cvvDiv);
+
+    deets.on('tokenize', (token) => {
+      // Modify to collect and send the token to your server
+      console.log(token);
+    });
+
+    function submitHandler(event) {
+      event.preventDefault();
+      deets.tokenize();
+      deets.validate(); // Will trigger error styling
+      // Your form submission code
+    }
+
+    const form = document.querySelector("#card_form");
+    form.addEventListener('submit', submitHandler);
+  </script>
+</head>
+<body>
+  <form id="card_form" action="/">
+    <input name="first_name" placeholder="First Name"/><br/><br/>
+    <input name="last_name" placeholder="Last Name"/><br/><br/>
+    <div id="card"></div>
+    <div id="cvv"></div>
+    <button type="submit" id="formSubmitBtn">Submit</button>
+  </form>
+</body>
+</html>
+```
+## Webpack/Vite App
+
+The following presents an example of integrating Deets into modern JavaScript applications that use build tools like Webpack or Vite for bundling and optimizing code. 
+
+```javascript showLineNumbers
+import Deets from 'https://checkout.v3staging.digitzs.com/api.js';
+
+var iframeConfig = {
+  origin: "http://127.0.0.1:8080", // The top-level origin URI
+  enablePrettyFormat: true, // Change to false if you want to do your own formatting
+  placeholder: "XXXX-XXXX-XXXX-XXXX",
+  cvvPlaceholder: "XXX",
+  debug: true,
+};
+
+const cardDiv = 'card';
+const cvvDiv = 'cvv';
+
+const deets = new Deets(iframeConfig, cardDiv, cvvDiv);
+
+deets.on('tokenize', (token) => {
+  // Modify to collect and send the token to your server
+  console.log(token);
+});
+
+function submitHandler(event) {
+  console.log("submitHandler called");
+  event.preventDefault();
+  deets.tokenize();
+  deets.validate(); // Will trigger error styling
+  // Your form submission code
+}
+
+const form = document.querySelector("#card_form");
+form.addEventListener('submit', submitHandler);
+```
+
+## What's Next?
+
+Check the available [events](/integration/events) you can customize the form behavior, or how set up the `submitHandler` [function](/integration/function).
