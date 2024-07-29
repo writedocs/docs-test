@@ -1,0 +1,42 @@
+---
+id: iframe-configuration-object
+title: iFrame Configuration Object
+slug: iframe-configuration-object
+description: Configure Deets iFrame effortlessly. Learn to set up front-end properties like CSS, character masking, and placeholders for a seamless integration
+---
+
+You must set up the configuration object before adding the iFrame to your form. This object controls some front-end properties of the iframe, such as CSS, character masking, and placeholder values.
+
+Below is an example of an iFrame configuration object with minimal parameters. 
+
+```javascript Javascript
+var iframeConfig = {
+  origin: "https://mysite.com",
+  enablePrettyFormat: true,
+  placeholder: "XXXX-XXXX-XXXX-XXXX",
+  cvvPlaceholder: "XXX"
+}
+```
+:::info PCI Compliance scope
+
+The Deets iFrame is configured to use PCI scope tokenization by default.
+
+:::
+
+The following table presents all possible parameters you can use to configure the iFrame object:
+
+| Parameter            | Type    | Required | Description                                                                                                                                                                                                         |
+| :------------------- | :------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| origin               | string  | true     | The fully qualified origin of your application. In the Deets Production environment, the origin must use HTTPS.                                                                                                     |
+| enablePrettyFormat   | boolean | true     | Enabling this property will auto-format the credit card number as it appears on the physical card. Change to false if you want to do your own formatting                                                            |
+| placeholder          | string  | true     | Sets the placeholder attribute of the input.                                                                                                                                                                        |
+| cvvPlaceholder       | string  | true     | Sets the placeholder attribute of the CVV input.                                                                                                                                                                    |
+| enableValidateOnBlur | boolean | false    | If true, the Validate function will be called when the input loses focus; otherwise, Validate must be invoked manually.                                                                                             |
+| debug                | boolean | false    | If enabled, data will be output to the console to assist debugging.                                                                                                                                                 |
+| customRegEx          | string  | false    | If true, the RegEx expression provided will be used during validation events and any internal validation. Please note that the backslash is an escape character. If used in your RegEx, it will need to be escaped. |
+| maskInput            | boolean | false    | Hides the input being typed by masking it with a masking character.                                                                                                                                                 |
+| title                | string  | false    | Content of the title element used by the iframe document.                                                                                                                                                           |
+| cvvTitle             | string  | false    | Content of the title element used by the CVV iframe document.                                                                                                                                                       |
+| customDataType       | object  | false    | The object contains custom validations appended to our standard card brand detection.                                                          |
+
+Once you've finished creating your configuration object, you can use it to [integrate the Deets iFrame](/integration/integrating-deets-iframe).
