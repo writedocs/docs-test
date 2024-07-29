@@ -1,0 +1,28 @@
+---
+id: function
+title: Function
+slug: function
+description: Master Deets iFrame functions. Learn to validate, tokenize, and handle events efficiently for a seamless integration experience.
+---
+
+The iFrame sends a JSON object to the parent window with [events ](/integration/events) containing information regarding the state of the iFrame, and the parent window interacts with the iFrame via functions. 
+
+Once your events are configured, you can add your event handler, triggering a function. See the example below.
+
+```javascript
+async function submitHandler(event) {  
+  event.preventDefault();  
+  deets.tokenize();
+  //deets.validate(); will trigger error styling.   
+  //deets.on('validate',{function}); can be used to add your own code.
+}
+const form = document.querySelector("form");  
+form.addEventListener("submit", submitHandler);
+```
+
+The Deets iFrames exposes the following functions:
+
+| Function | Description                                                                  |
+| -------- | ---------------------------------------------------------------------------- |
+| Validate | Invokes validation routines on the contents of the iFrame.                   |
+| Tokenize | Validates and tokenizes the contents of the iFrame (if validations succeed). |
