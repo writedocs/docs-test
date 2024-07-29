@@ -1,0 +1,51 @@
+---
+id: tokenization
+title: Tokenization
+slug: tokenization
+description: Learn how tokenization secures sensitive data by replacing it with indecipherable tokens, ensuring your information remains safe even in the event of a breach.
+---
+
+import CustomImage from '@site/src/components/CustomImage';
+
+Tokenization makes sensitive information safe by swapping it with non-sensitive data called "tokens." These tokens can be used in a database or internal system without exposing sensitive information.
+
+What sets tokenization apart is that the tokenized data is indecipherable and cannot be reversed. This means there's no direct link between the token and the original data. You can't convert tokens back into the original sensitive information without specific additional data stored separately. So, even if there's a security breach in a tokenized system, the original sensitive data remains safe and isn't compromised.
+
+## What is a token?
+
+ A token is a piece of data that stands in for another, more valuable information. Tokens have virtually no value on their own, and they are only useful because they represent something valuable, such as a credit card primary account number (PAN). The tokens are generated using mathematical algorithms and can't be reversed.
+
+<CustomImage 
+  src="img/docs/additional-information/tokenization.png"
+  alt="What is a token?" 
+/>
+
+Even though tokens may seem unrelated, they still keep certain aspects of the original data, like length or format, so that they can be used in regular business operations without any issues. The original sensitive data is stored securely outside the organization's internal systems.
+
+## How does tokenization work?
+
+Tokenization swaps the sensitive Credit card data with a randomly generated token to safely access, pass, transmit, and retrieve customer credit card information. The flux below presents a transaction with credit card tokenization:
+
+<CustomImage 
+  src="img/docs/additional-information/how-does-tokenization-work.png"
+  alt="How does tokenization work?" 
+/>
+
+Where:
+
+1. Cardholders initiate a transaction and enter their sensitive credit card data.
+2. Deets captures and sends the information to the merchant acquirer bank as a token.
+3. The Acquirer Bank transmits the token to the credit card networks for validation and authorization.
+4. Once authorized, the data is sent to the Card's issuer bank.
+5. The issuer bank authorizes or declines the transaction.
+6. When authorized by the bank, a unique token is returned to the merchant for current and future transactions.
+
+:::info Invisible process for cardholders
+
+This process is done behind the scenes, so customers and cardholders do not see or take part in it.
+
+:::
+
+## Tokenization vs Encryption
+
+Tokenization aims to protect sensitive data while preserving its business utility. This differs from encryption, where sensitive data is modified and stored with methods that do not allow its continued use for business purposes. Additionally, encrypted numbers can be decrypted with the appropriate key. Tokens, however, cannot be reversed because there is no significant mathematical relationship between the token and its original number.
