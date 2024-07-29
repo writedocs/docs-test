@@ -1,0 +1,89 @@
+---
+id: create-a-payment
+title: Create a Payment
+slug: create-a-payment
+description: Learn how to create payments with Deets in three steps, retrieve a token, authenticate the API, and process payments securely using our detailed guide.
+---
+
+After a token is generated from a credit card, it can be used to create a payment. This is a three-step process that goes as follows:
+
+1. Use Deets' iFrame Tokenize event to retrieve the token's body and capture the `token` parameter.
+2. Authenticate into our API so you can perform API requests. See the sections below for more information on this.
+3. Send the `token` parameter to us through the Deets API to process the payment.
+
+:::info API Route
+
+We will provide you with the production API route during your onboarding. To perform integration tests, use our Staging API:
+
+```html URL
+  https://test.digitzsapi.com/test
+```
+
+:::
+
+See the section below to learn how to authorize your API Requests.
+
+## Authorizing API requests
+
+The Deets API requires a two-part authentication and authorization to access it. We will provide you with an `appId` to generate the required token for authorization. The steps to authorize your access to the Deets API are as follows:
+
+1. First, you need to generate an API Key. See more details [here](/integration/create-a-payment#step-1-create-an-api-key).
+2. Use the created API Key to generate an App Token. See more details [here](/integration/create-a-payment#step-2-create-an-app-token).
+
+The created App Token is sent in conjunction with the API Key in all request headers so the API can authorize the request and perform payments.
+
+### Step 1: Create an API Key
+
+To create the `apiKey` use the [Create API Key](/api-reference/authorization/create-api-key) endpoint. The request body should include the following information:
+
+- `type`: Set this to `auth`.
+- `appId`: This is the `appId` we provided during your onboarding. Input it here to authorize the request. 
+
+The code block below presents an example of the body request.
+
+```json JSON
+{
+    "data": {
+        "type": "auth",
+        "attributes": {
+            "appId": "{{appId}}" // Input the appId that we provided you during onboarding.
+        }
+    }
+}
+```
+
+If the request is successful, the response will contain the parameter `appKey` with the generated key. This key expires only when a new one is created and is only used to generate the required `appToken` for authorization.
+
+### Step 2: Create an App Token
+
+To create the `appToken` use the [Create App Token](/api-reference/authorization/create-app-token) endpoint. The request body should be as follows.
+
+- `type`: Set this to `auth`.
+- `appKey`: This is the key generated in the previous section. Input it here to generate your`appToken`.
+
+```json
+{
+    "data": {
+        "type": "auth",
+        "attributes": {
+            "appKey": "{{appKey}}" // Input the API Key generated before.
+        }
+    }
+}
+```
+
+If the request is successful, the response will contain the parameter `appToken` with the generated token.
+
+:::warning 
+
+The `appToken` expires after one hour. Therefore, after one hour you will need to generate an `appToken` again.
+
+:::
+
+## Create your first Payment request
+
+You can make your first payment request once you have created your App Token. 
+
+For this, use the [Create a Payment](/api-reference/payments/create-payments) endpoint, and include the generated  `appToken` and `apiKey`  in the request headers.
+
+You will have to specify which type of payment you wish to make. [Check this page](/integration/payment-types) for more details on the payment types and request examples.
