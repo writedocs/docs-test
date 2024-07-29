@@ -1,0 +1,816 @@
+---
+id: create-split-payments
+title: "Create Split Payments"
+description: "Use this endpoint to create a split payment."
+sidebar_label: "Create Split Payments"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: api-reference/payment-split/payment-split
+custom_edit_url: null
+proxy: https://proxy.writechoice.io/
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create Split Payments"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/payments"}
+>
+  
+</MethodEndpoint>
+
+
+
+Use this endpoint to create a split payment.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Header Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"Authorization","in":"header","schema":{"type":"string"},"description":"appToken created by `/auth/token`\n<small>Format:  `Bearer xxxxxx...`</small>","example":"Bearer <appToken>"}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  data
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <div
+                style={{"marginTop":".5rem","marginBottom":".5rem"}}
+              >
+                
+                
+                A key for grouping different types of API data.
+                
+                
+              </div><SchemaItem
+                collapsible={false}
+                name={"type"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"payments","description":"The type of transaction."}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={true}
+                className={"schemaItem"}
+              >
+                <details
+                  style={{}}
+                  className={"openapi-markdown__details"}
+                >
+                  <summary
+                    style={{}}
+                  >
+                    <span
+                      className={"openapi-schema__container"}
+                    >
+                      <strong
+                        className={"openapi-schema__property"}
+                      >
+                        attributes
+                      </strong><span
+                        className={"openapi-schema__name"}
+                      >
+                         object
+                      </span>
+                    </span>
+                  </summary><div
+                    style={{"marginLeft":"1rem"}}
+                  >
+                    <div
+                      style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                    >
+                      
+                      
+                      A key for grouping payment identification data.
+                      
+                      
+                    </div><SchemaItem
+                      collapsible={false}
+                      name={"paymentType"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={"**Possible values:** [`tokenv3Split`]"}
+                      schema={{"type":"string","description":"The type of payment transaction.","enum":["tokenv3Split"],"example":"tokenv3Split"}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={false}
+                      name={"merchantId"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"{{merchantId}}","description":"The merchant account number."}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={false}
+                      name={"miscData"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"{\"email\":\"johndoe@john.com\",\"originIp\":\"127.0.0.1\",\"customerIp\":\"127.0.0.1\",\"rawData\":\"Lorem ipsum\"}","description":"Optional additional information to store with the call (optional)."}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              transaction
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping payment transaction data. **Required for all payment types except `secondSplit`**.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"amount"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"500","description":"The transaction amount in cents."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"currency"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"USD","description":"The three-character code."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"invoice"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"PAYMENT-TOKEN-7","description":"The invoice number for the transaction."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              token
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping payment token information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"holder"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"John Doe","description":"The first and last name on the account."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"tokenId"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"{{token}}","description":"The Token ID retrieved from the embedded checkout."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"expiry"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"0229","description":"The expiration date of the payment method."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"useAVS"}
+                            required={false}
+                            schemaName={"boolean"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"boolean","example":true,"description":"True/False for requiring a ZIP match (or greater) to capture the payment."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              billingAddress
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping billing address data.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"line1"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"21 Jump Street","description":"The card holder’s street address (optional but recommended)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"line2"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Suite 007","description":"The card holder’s additional street address information (optional but recommended)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"city"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Los Angeles","description":"The card holder’s home city (optional but recommended)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"state"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"CA","description":"The card holder’s home state (optional but recommended)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"zip"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"83204","description":"The card holder’s zip or postal code (optional, but recommended.)"}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"country"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"USA","description":"The card holder’s home country (optional but recommended)."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              split
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping split information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"merchantId"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"{{merchantId2}}","description":"The merchant ID for the split transaction."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"amount"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"100","description":"The amount to be split in cents."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem>
+                  </div>
+                </details>
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"201"}
+        value={"201"}
+      >
+        <div>
+          
+          
+          Created
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                links
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"self"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"URL for the current resource."}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem><SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                data
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <SchemaItem
+                              collapsible={false}
+                              name={"type"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The type of transaction."}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"id"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The payment transaction identification code."}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={true}
+                              className={"schemaItem"}
+                            >
+                              <details
+                                style={{}}
+                                className={"openapi-markdown__details"}
+                              >
+                                <summary
+                                  style={{}}
+                                >
+                                  <span
+                                    className={"openapi-schema__container"}
+                                  >
+                                    <strong
+                                      className={"openapi-schema__property"}
+                                    >
+                                      attributes
+                                    </strong><span
+                                      className={"openapi-schema__name"}
+                                    >
+                                       object
+                                    </span>
+                                  </span>
+                                </summary><div
+                                  style={{"marginLeft":"1rem"}}
+                                >
+                                  <div
+                                    style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                                  >
+                                    
+                                    
+                                    A key for grouping payment identification data.
+                                    
+                                    
+                                  </div><SchemaItem
+                                    collapsible={false}
+                                    name={"paymentType"}
+                                    required={false}
+                                    schemaName={"string"}
+                                    qualifierMessage={undefined}
+                                    schema={{"type":"string","description":"The application key."}}
+                                  >
+                                    
+                                  </SchemaItem><SchemaItem
+                                    collapsible={true}
+                                    className={"schemaItem"}
+                                  >
+                                    <details
+                                      style={{}}
+                                      className={"openapi-markdown__details"}
+                                    >
+                                      <summary
+                                        style={{}}
+                                      >
+                                        <span
+                                          className={"openapi-schema__container"}
+                                        >
+                                          <strong
+                                            className={"openapi-schema__property"}
+                                          >
+                                            transaction
+                                          </strong><span
+                                            className={"openapi-schema__name"}
+                                          >
+                                             object
+                                          </span>
+                                        </span>
+                                      </summary><div
+                                        style={{"marginLeft":"1rem"}}
+                                      >
+                                        <div
+                                          style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                                        >
+                                          
+                                          
+                                          A key for grouping payment identification data.
+                                          
+                                          
+                                        </div><SchemaItem
+                                          collapsible={false}
+                                          name={"code"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string","description":"The banking entity response code."}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"message"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string","description":"The status of the transaction."}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"amount"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string","description":"The transaction amount in dollars and cents."}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"invoice"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string","description":"The invoice number for the transaction."}}
+                                        >
+                                          
+                                        </SchemaItem><SchemaItem
+                                          collapsible={false}
+                                          name={"currency"}
+                                          required={false}
+                                          schemaName={"string"}
+                                          qualifierMessage={undefined}
+                                          schema={{"type":"string","description":"The currency used for the transaction."}}
+                                        >
+                                          
+                                        </SchemaItem>
+                                      </div>
+                                    </details>
+                                  </SchemaItem>
+                                </div>
+                              </details>
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"links\": {\n    \"self\": \"string\"\n  },\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"paymentType\": \"string\",\n      \"transaction\": {\n        \"code\": \"string\",\n        \"message\": \"string\",\n        \"amount\": \"string\",\n        \"invoice\": \"string\",\n        \"currency\": \"string\"\n      }\n    }\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem><TabItem
+                  label={"Result"}
+                  value={"Result"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"links\": {\n    \"self\": \"x\"\n  },\n  \"data\": {\n    \"type\": \"payments\",\n    \"id\": \"{paymentId}\",\n    \"attributes\": {\n      \"paymentType\": \"card\",\n      \"transaction\": {\n        \"code\": \"0\",\n        \"message\": \"Success\",\n        \"amount\": \"500\",\n        \"invoice\": \"123456\",\n        \"currency\": \"USD\",\n        \"authCode\": \"A11111\",\n        \"avsResult\": \"T\",\n        \"gross\": \"500\",\n        \"net\": \"450\",\n        \"grossMinusNet\": \"50\",\n        \"fee\": \"35\",\n        \"rate\": \"2.95\"\n      }\n    }\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      
