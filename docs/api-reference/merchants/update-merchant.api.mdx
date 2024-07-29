@@ -1,0 +1,383 @@
+---
+id: update-merchant
+title: "Update Merchant's AVS Mode"
+description: "Use this endpoint to update the AVS mode for the specified merchant."
+sidebar_label: "Update Merchant's AVS Mode"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFVlFv2zgM/isCX+4OcJ3ePRrFgGzoAcWh2LC0fVkCWLGYWIstqRLdNjPy3w+U7cZuim47DDg/FI1EUR8/fiTVgnXoJWlrrhRk0DglCc9q9EUpDUECCkPhtWMLyOA2oKBSB4FGOasNCbKiOySoRDG/W4jaKhQb6+NCcFjojUYlBp8pJOCklzUS+gDZlxaMrBEymDdUWq+/RTiQgOYbS5QKPSQQihJrCVkLtHdsHshrs4XDS4zSuRu7QyMKj5JQifVe5DPZUDkjXs+X5iLUsqre/W19LSkTIn+P0qMXT/FL0zS/mHUmkAA+ydpVfGNvdTHc8A4OyTP6Ib4rNUB3ksqfAX5TomiMvm9QaIWGmDcv7CYSObgXa9Rm23Ou0gm+Dj4k4PG+0R4VZOQbPKy6FQz03qo9I5kaJFBYQ2iIt6RzlS5iDmZfAwNrT0Ow669YsDycZwGRxsC7StKrVtM452KH+6iQrbeN43CU3mzQI+tp7zBw0PNPV4L9pWKBKD5GVyGeqq1Hoc0mZk9bk57g6O5/SfiYqoHOcIKOs8DnIvFemiCLeIm4Yd0/yKpBUTeBEyGWRz9LSDmjksjrdUNjHD/Bw5D3jn8hjRJO7msm5s2Ao4O3I57fLU4QXPdx5PO7RR6RRF0xkrHmfguxsAMSb6Xi0sh1haE/tsN9DJ0veBPBpSmlKVC9Svlz5yDLF001TzYVH6SJUBckjZJe5YnIr63i7oV5IqwX+XBBnsLh+WPtB2dN6Jj66/w8KnUC4OMOvlsDfRzRid3x36gFyKBdGiGWUGmzC0vIRPzNKwGrDS8s4WkJvHhIOlPW9cSSSessR4JKhl2tpntXqne3NAfgCP/X+vzh6vuVdabV92+YHwV07Ke9fx2iwmRR2MaQeCzRYz+wKk1iazEIuSHsptgIX6yCCsNIYgnUSKXl+emaSDo3/gxmz6Bn7TF1Bx4J6B+G4df4iscckQvZbEYYKFV6q+lbkE6nha3jGnATD1g0XtM+ngtYnEP2ZTXeWLAOuiR0288USaf/wf3JUO1n19OZdPpsh/uoJlb85+O8uBwK+EQ/4yY6bXx9P+qbTuwMx/KPlHE7i640xeZwPfLF3HQp/DM9T885384GqmUsxB7zbffquJ72KO4IL4XQHkv7Vz1gegIIn2jmKqkNY4yZbPvsf5mwk41eB6sEShuITdp2LQPe+upw4OX7Bj0nd5XAg/Sam2xMtdKB/1eQbWQV8I3wfv/cD/Y/xH98Tbwa2SAiwwoa2h4kwIqZvHwOq0MyqIuRdwYfOnxnN+zm6OCky/JrqjsxLwp09KbtalR2n25vIIF1/7jh/EEGXj7yU0g+dlhtpCuqM661UEmzbeSWbTuX/P0LAHLQMA==
+sidebar_class_name: "put api-method"
+info_path: api-reference/merchants/merchants
+custom_edit_url: null
+proxy: https://proxy.writechoice.io/
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update Merchant's AVS Mode"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/merchants/{merchantId}"}
+>
+  
+</MethodEndpoint>
+
+
+
+Use this endpoint to update the AVS mode for the specified merchant.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Path Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"merchantId","in":"path","schema":{"type":"string"},"description":"The unique identifier of the merchant being updated.","example":"xxxxxx","required":true}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Header Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"Authorization","in":"header","schema":{"type":"string"},"description":"appToken created by `/auth/token`\n<small>Format:  `Bearer xxxxxx...`</small>","example":"Bearer <appToken>"}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  data
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <div
+                style={{"marginTop":".5rem","marginBottom":".5rem"}}
+              >
+                
+                
+                A key for grouping different types of API data. See Objects for more information.
+                
+                
+              </div><SchemaItem
+                collapsible={false}
+                name={"type"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"merchants","description":"The type of transaction. This value must be \"merchants\"."}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={true}
+                className={"schemaItem"}
+              >
+                <details
+                  style={{}}
+                  className={"openapi-markdown__details"}
+                >
+                  <summary
+                    style={{}}
+                  >
+                    <span
+                      className={"openapi-schema__container"}
+                    >
+                      <strong
+                        className={"openapi-schema__property"}
+                      >
+                        attributes
+                      </strong><span
+                        className={"openapi-schema__name"}
+                      >
+                         object
+                      </span>
+                    </span>
+                  </summary><div
+                    style={{"marginLeft":"1rem"}}
+                  >
+                    <div
+                      style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                    >
+                      
+                      
+                      A key for grouping identification and payment information.
+                      
+                      
+                    </div><SchemaItem
+                      collapsible={false}
+                      name={"group"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"AVS","description":"Must be `AVS` for updating the merchant's AVS setting. Enables `AVS` key."}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={false}
+                      name={"AVS"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"Enhanced","description":"The AVS mode to set the merchant to. Can be `Standard`, `Moderate`, or `Enhanced`."}}
+                    >
+                      
+                    </SchemaItem>
+                  </div>
+                </details>
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"200"}
+        value={"200"}
+      >
+        <div>
+          
+          
+          Ok
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                data
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <div
+                              style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                            >
+                              
+                              
+                              A key for grouping different types of API data.
+                              
+                              
+                            </div><SchemaItem
+                              collapsible={false}
+                              name={"type"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The type of transaction. This value must be \"merchants\"."}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"id"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"A merchant identifier. This is the account where the split goes after the transaction settles."}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\"\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem><TabItem
+                  label={"ok"}
+                  value={"ok"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"links\": {\n    \"self\": \"x\"\n  },\n  \"data\": {\n    \"type\": \"merchants\",\n    \"id\": \"merchantId\"\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      
