@@ -1,0 +1,97 @@
+:root {
+  --openapi-code-blue: #4860F5;
+  --openapi-code-green: #00A400;
+  --openapi-code-red: #F11D48;
+  --openapi-code-orange: #ED8C19;
+  --openapi-code-purple: #996DFF;
+}
+
+/* Sidebar Method labels */
+.api-method > .menu__link {
+  align-items: center;
+  justify-content: start;
+}
+
+.api-method > .menu__link::before {
+  display: flex;
+  width: 40px;
+  height: 16px;
+  font-size: 9px;
+  line-height: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  margin-right: var(--ifm-spacing-horizontal);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  color: white;
+}
+
+.badge {
+  border-radius: 0.4rem;
+}
+
+.get > .menu__link::before {
+  content: 'get';
+  background-color: var(--openapi-code-green);
+}
+
+.badge.badge--primary {
+  background-color: var(--openapi-code-green);
+  border-color: var(--openapi-code-green);
+}
+
+.post > .menu__link::before {
+  content: 'post';
+  background-color: var(--openapi-code-blue);
+}
+
+.badge.badge--success {
+  background-color: var(--openapi-code-blue);
+  border-color: var(--openapi-code-blue);
+}
+
+.put > .menu__link::before {
+  content: 'put';
+  background-color: var(--openapi-code-purple);
+}
+
+.badge.badge--info {
+  background-color: var(--openapi-code-purple);
+  border-color: var(--openapi-code-purple);
+}
+
+.delete > .menu__link::before {
+  content: 'del';
+  background-color: var(--openapi-code-red);
+}
+
+.badge.badge--danger {
+  background-color: var(--openapi-code-red);
+  border-color: var(--openapi-code-red);
+}
+
+.patch > .menu__link::before {
+  content: 'patch';
+  background-color: var(--openapi-code-orange);
+}
+
+.badge.badge--warning {
+  background-color: var(--openapi-code-orange);
+  border-color: var(--openapi-code-orange);
+}
+
+.openapi-explorer__request-btn {
+  background-color: var(--portal-primary-color1);
+}
+
+.openapi-explorer__request-btn:hover {
+  background-color: var(--portal-primary-color2);
+}
+
+.openapi-tabs__schema-item {
+  font-size: 12px;
+}

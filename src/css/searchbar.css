@@ -1,0 +1,63 @@
+.algolia-autocomplete .algolia-docsearch-suggestion--no-results,
+.algolia-autocomplete .algolia-docsearch-suggestion--category-header,
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--no-results
+  .algolia-docsearch-suggestion--text {
+  color: var(--portal-primary-color2) !important;
+  background-color: #efecf5 !important;
+}
+
+.algolia-autocomplete .ds-cursor .algolia-docsearch-suggestion--wrapper {
+  box-shadow: inset -2px 0 0 #efecf5 !important;
+  color: var(--portal-primary-color2) !important;
+  background-color: var(--portal-primary-color5) !important;
+}
+
+.algolia-autocomplete .ds-cursor .algolia-docsearch-suggestion--wrapper:hover {
+  background-color: var(--portal-primary-color5) !important;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--title {
+  font-weight: bold;
+  color: var(--portal-optional-color4) !important;
+}
+
+.algolia-autocomplete .algolia-docsearch-suggestion--text {
+  font-size: 0.8rem;
+  color: var(--portal-optional-color4) !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--title
+  .algolia-docsearch-suggestion--highlight {
+  background: var(--portal-highlights-color1) !important;
+  color: var(--portal-optional-color4) !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--text
+  .algolia-docsearch-suggestion--highlight {
+  background: var(--portal-highlights-color1) !important;
+  color: var(--portal-optional-color4) !important;
+  box-shadow: inset 0 -2px 0 0 var(--portal-primary-color2) !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion--text
+  .algolia-docsearch-suggestion--highlight {
+  box-shadow: inset 0 -2px 0 0 var(--portal-primary-color2) !important;
+}
+
+.algolia-autocomplete
+  .algolia-docsearch-suggestion
+  .algolia-docsearch-suggestion--content.algolia-docsearch-suggestion--no-results
+  .algolia-docsearch-suggestion--text:after {
+  content: '😔';
+}
+
+.algolia-autocomplete .ds-dropdown-menu:before {
+  background: var(--portal-primary-color5) !important;
+  border-radius: 2px !important;
+  border-right: 1px solid var(--portal-primary-color5) !important;
+  border-top: 1px solid var(--portal-primary-color5) !important;
+}
