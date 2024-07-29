@@ -1,0 +1,109 @@
+---
+id: payment-types
+title: Payment Types
+slug: payment-types
+description: Explore Deets' regular and split payments. Learn to configure and process payments securely using Deets API with detailed examples.
+---
+
+Deets allow you to perform two types of payments: 
+
+- Regular 
+- Split
+
+Read more details on each type in the sections below.
+
+## Regular Payment
+
+Regular payment means the paid amount is not split and is completely sent to the specified merchant. 
+
+The request is made to the [Create Payments](/api-reference/payments/create-payments) endpoint. To authorize it, its headers must contain the generated `appToken` and the `apiKey` that we provided you. For this type of payment, these three parameters of the request body must be configured as follows: 
+
+- `paymentType`: Must be set to `tokenv3` to specify this is a regular payment.
+- `merchantId`: This is where you input the MID (Merchant ID).
+- `tokenId`: This is where you input the credit card token captured by our iFrame.
+
+See the JSON request body example below.
+
+```json CURL
+{
+    "data": {
+        "type": "payments",
+        "attributes": {
+            "paymentType": "tokenv3",
+            "merchantId": "{{merchantId}}",
+            "miscData": "{\"email\":\"johndoe@john.com\",\"originIp\":\"127.0.0.1\",\"customerIp\":\"127.0.0.1\",\"rawData\":\"Lorem ipsum\"}",
+            "token": {
+                "tokenId": "{{token}}",
+                "holder": "Tommy",
+                "expiry": "0229",
+                "useAVS": true
+            },
+            "transaction": {
+                "amount": "001",
+                "currency": "USD",
+                "invoice": "PAYMENT-TOKEN-7"
+            },
+            "billingAddress": {
+                "line1": "21 Jump Street",
+                "line2": "Suite 007",
+                "city": "Los Angeles",
+                "state": "CA",
+                "zip": "832044716",
+                "country": "USA"
+            }
+        }
+    }
+}
+```
+
+## Split Payment
+
+When part of the paid amount must be split and sent to a third party, you must make a split payment request.
+
+The request is made to the [Create Split Payments](/api-reference/payment-split/create-split-payments) endpoint. Just like regular payments, the request headers must contain the generated `appToken` and the `apiKey`. For split payments, these three parameters of the request body must be configured as follows:
+
+- `paymentType`: Must be set to `tokenv3Split` to specify this is a split payment.
+- `merchantId`: This is where you input the MID (Merchant ID).
+- `tokenId`: This is where you input the credit card token captured by our iFrame.
+- `split`: This object is where you specify the third-party MID in the`merchantId` parameter and the amount to be split in the `amount` parameter.
+
+See the JSON request body example below.
+
+```json
+
+{
+    "data": {
+        "type": "payments",
+        "attributes": {
+            "paymentType": "tokenv3Split",
+            "merchantId": "{{merchantId}}",
+            "miscData": "{\"email\":\"johndoe@john.com\",\"originIp\":\"127.0.0.1\",\"customerIp\":\"127.0.0.1\",\"rawData\":\"Lorem ipsum\"}",
+            "token": {
+                "tokenId": "{{token}}",
+                "holder": "John Doe",
+                "expiry": "0229",
+                "useAVS": true
+            },
+            "transaction": {
+                "amount": "500",
+                "currency": "USD",
+                "invoice": "PAYMENT-TOKEN-7"
+            },
+            "split": {
+                "merchantId": "{{merchantId2}}",
+                "amount": "100"
+            },
+            "billingAddress": {
+                "line1": "21 Jump Street",
+                "line2": "Suite 007",
+                "city": "Los Angeles",
+                "state": "CA",
+                "zip": "83204",
+                "country": "USA"
+            }
+        }
+    }
+}
+
+
+```
