@@ -1,41 +1,53 @@
-# Website
+# Documentation Portal
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+## Website Link
 
-### Installation
+https://deets.docs.writechoice.io/
 
-```
-$ yarn
-```
+Package management solution: YARN
+Docusaurus: 3.14
+API Reference generation: [docusaurus-openapi-docs](https://github.com/PaloAltoNetworks/docusaurus-openapi-docs)
 
-### Local Development
+### Generating OpenAPI Docs
 
-```
-$ yarn start
-```
+To generate all OpenAPI docs, run the following command from the root directory of your project:
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
+```bash
+yarn docusaurus gen-api-docs all
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+> This will generate API docs for all of the OpenAPI specification (OAS) files referenced in your `docusaurus-plugin-openapi-docs` config.
 
-### Deployment
+You may also generate OpenAPI docs for a single path or OAS by specifying the unique `id`:
 
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
+```bash
+yarn docusaurus gen-api-docs <id>
 ```
 
-Not using SSH:
+Example:
 
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
+```bash
+yarn docusaurus gen-api-docs petstore
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+> The example above will only generate API docs relative to `petstore`.
+
+### Cleaning API Docs
+
+To clean/remove all API Docs, run the following command from the root directory of your project:
+
+```bash
+yarn docusaurus clean-api-docs all
+```
+
+You may also remove a particular set of API docs by specifying the unique `id` of your desired spec instance.
+
+```bash
+yarn docusaurus clean-api-docs <id>
+```
+
+Example:
+
+```bash
+yarn docusaurus clean-api-docs petstore
+```
