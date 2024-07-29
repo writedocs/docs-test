@@ -1,72 +1,66 @@
-/**
- * Creating a sidebar enables you to:
- - create an ordered group of docs
- - render a sidebar for each doc of that group
- - provide next/previous navigation
-
- The sidebars can be generated from the filesystem, or explicitly defined here.
-
- Create as many sidebars as you want.
- */
-
- const { 
-  gettingStarted,
-  integration,
-  additionalInformation,
-  authorization,
-  merchants,
-  payments
-} = require('./.sidebar');
-
-// @ts-check
-/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
-const sidebars = {
-  docs: [
+module.exports = {
+  "docs": [
     {
-      type: 'html',
-      value: '<span class=\'sidebar_title\'>Getting Started</span>',
-      defaultStyle: true,
-      className: 'sidebar_title',
+      "type": "html",
+      "value": "<span class='sidebar_title'>category1</span>",
+      "defaultStyle": true,
+      "className": "sidebar_title"
     },
-    ...gettingStarted,
     {
-      type: 'html',
-      value: '<span class=\'sidebar_title\'>Integration</span>',
-      defaultStyle: true,
-      className: 'sidebar_title',
+      "type": "doc",
+      "id": "getting-started/what-is-deets"
     },
-    ...integration,
     {
-      type: 'html',
-      value: '<span class=\'sidebar_title\'>Additional Information</span>',
-      defaultStyle: true,
-      className: 'sidebar_title',
+      "type": "doc",
+      "id": "getting-started/start-using-deets"
     },
-    ...additionalInformation,
+    {
+      "type": "doc",
+      "id": "getting-started/onboard-merchants"
+    },
+    {
+      "type": "category",
+      "label": "Integrating Deets iFrame",
+      "link": {
+        "type": "doc",
+        "id": "integration/integrating-deets-iframe"
+      },
+      "items": [
+        "integration/events",
+        "integration/function"
+      ]
+    }
   ],
-  apiReference: [
+  "apiReference": [
     {
-      type: 'html',
-      value: '<span class=\'sidebar_title\'>Authorization</span>',
-      defaultStyle: true,
-      className: 'sidebar_title',
+      "type": "html",
+      "value": "<span class='sidebar_title'>category1</span>",
+      "defaultStyle": true,
+      "className": "sidebar_title"
     },
-    ...authorization,
     {
-      type: 'html',
-      value: '<span class=\'sidebar_title\'>Merchants</span>',
-      defaultStyle: true,
-      className: 'sidebar_title',
+      "type": "doc",
+      "id": "getting-started/what-is-deets"
     },
-    ...merchants,
     {
-      type: 'html',
-      value: '<span class=\'sidebar_title\'>Payments</span>',
-      defaultStyle: true,
-      className: 'sidebar_title',
+      "type": "doc",
+      "id": "getting-started/start-using-deets"
     },
-    ...payments,
+    {
+      "type": "doc",
+      "id": "getting-started/onboard-merchants"
+    },
+    {
+      "type": "category",
+      "label": "Integrating Deets iFrame",
+      "link": {
+        "type": "doc",
+        "id": "integration/integrating-deets-iframe"
+      },
+      "items": [
+        "integration/events",
+        "integration/function"
+      ]
+    }
   ]
 };
-
-module.exports = sidebars;

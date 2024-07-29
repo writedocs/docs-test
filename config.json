@@ -1,0 +1,40 @@
+{
+  "sidebar": {
+    "docs": [
+      {
+        "category": "category1",
+        "pages": [
+          "getting-started/what-is-deets",
+          "getting-started/start-using-deets",
+          "getting-started/onboard-merchants",
+          {
+            "page": "integration/integrating-deets-iframe",
+            "label": "Integrating Deets iFrame",
+            "subpages": [
+              "integration/events",
+              "integration/function"
+            ]
+          }
+        ]
+      }
+    ],
+    "apiReference": [
+      {
+        "category": "category1",
+        "pages": [
+          "getting-started/what-is-deets",
+          "getting-started/start-using-deets",
+          "getting-started/onboard-merchants",
+          {
+            "page": "integration/integrating-deets-iframe",
+            "label": "Integrating Deets iFrame",
+            "subpages": [
+              "integration/events",
+              "integration/function"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
