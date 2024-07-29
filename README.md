@@ -51,3 +51,5 @@ Example:
 ```bash
 yarn docusaurus clean-api-docs petstore
 ```
+
+> The example above will remove all API docs relative to `burgers`.
