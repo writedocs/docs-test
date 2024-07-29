@@ -1,0 +1,28 @@
+---
+id: overview
+title: Overview
+slug: overview
+description: Get started with Deets. Learn how to create tokens and process payments securely, reducing your PCI scope and ensuring compliance with industry standards.
+---
+
+Deets enables you to perform credit card payments while keeping you out of PCI scope. To perform payments using Deets, you need to complete two steps: 
+
+1. [Create a token](/integration/create-a-token) using Deets iFrame.
+2. [Create a payment](/integration/create-a-payment) using Deets API and the token from Step 1.
+
+## Step 1: Create a token
+
+To create a token with your client payment data, you will use Deets iFrame. You need to integrate Deets iFrame into your application to ensure that all sensible information related to the payment will be out of your hands when performing the payment. As a result, it reduces your PCI scope and ensures you comply with industry regulations.
+
+Deets iFrame will transfer the information to the server and generate protected tokens when your customer provides the credit card payment information. The server will return the tokens to your system. After receiving the token, you can proceed and create the payment.
+
+To learn how to integrate Deets iFrame into your system, access [Create a Token](/integration/create-a-token).
+
+## Step 2: Create a payment
+
+You can create the payment after receiving the tokenized data from Deets iFrame. Using Deets API, you can proceed using one of two options:
+
+- Create a regular payment.
+- Create a split payment. Use this option to transfer part of the funds directly to the platform. 
+
+Access the page [Create a Payment](/integration/create-a-payment) to get more information on creating payment using the Deets API.
