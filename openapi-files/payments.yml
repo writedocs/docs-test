@@ -1,0 +1,968 @@
+openapi: 3.1.0
+info:
+  title: Payments
+  version: 1.0.0
+servers:
+  - url: https://test.digitzsapi.com/test
+tags:
+    - name: Authorization
+    - name: Payments
+    - name: Merchants
+components:
+  schemas:
+    data:
+      type: object
+      description: A key for grouping different types of API data.
+    APIcallType:
+      type: string
+      description: This API call type. This call must be `auth`.
+      default: auth
+    attributes:
+      type: object
+      description: A key for grouping data.
+    appId:
+      type: string
+      description: Supplied by Digitzs on onboarding.
+    appKey:
+      type: string
+      description: The key used to create an appToken with `/auth/token`.
+    appToken:
+      type: string
+      description: The `Authorization` header value to use for most API calls.
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: x-api-key
+security:
+  - sec0: []
+paths:
+  /payments:
+    post:
+      summary: Create Payments
+      operationId: create-payments
+      description: >-
+        Use this endpoint to create a payment.
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: A key for grouping different types of API data.
+                  properties:
+                    type:
+                      type: string
+                      example: payments
+                      description: The type of transaction.
+                    attributes:
+                      type: object
+                      description: A key for grouping payment identification data.
+                      properties:
+                        paymentType:
+                          type: strings
+                          description: >-
+                            The type of payment transaction.
+                          enum:
+                            - tokenv3
+                          example: tokenv3
+                        merchantId:
+                          type: string
+                          example: "{{merchantId}}"
+                          description: The merchant account number.
+                        miscData:
+                          type: string
+                          example: "{\"email\":\"johndoe@john.com\",\"originIp\":\"127.0.0.1\",\"customerIp\":\"127.0.0.1\",\"rawData\":\"Lorem ipsum\"}"
+                          description: Optional additional information to store with the call (optional).
+                        transaction:
+                          type: object
+                          description: >-
+                            A key for grouping payment transaction data.
+                            **Required for all payment types except `secondSplit`**.
+                          properties:
+                            amount:
+                              type: integer
+                              example: 001
+                              description: The transaction amount in cents.
+                            currency:
+                              type: string
+                              example: USD
+                              description: The three-character code.
+                            invoice:
+                              type: string
+                              example: PAYMENT-TOKEN-7
+                              description: The invoice number for the transaction.
+                        token:
+                          type: object
+                          description: A key for grouping payment token information.
+                          properties:
+                            holder:
+                              type: string
+                              example: Tommy
+                              description: The first and last name on the account.
+                            tokenId:
+                              type: string
+                              example: "{{token}}"
+                              description: The Token ID retrieved from the embedded checkout.
+                            expiry:
+                              type: string
+                              example: "0229"
+                              description: The expiration date of the payment method.
+                            useAVS:
+                              type: boolean
+                              example: true
+                              description: True/False for requiring a ZIP match (or greater) to capture the payment.
+                        billingAddress:
+                          type: object
+                          description: A key for grouping billing address data.
+                          properties:
+                            line1:
+                              type: string
+                              example: 21 Jump Street
+                              description: The card holder’s street address (optional but recommended).
+                            line2:
+                              type: string
+                              example: Suite 007
+                              description: The card holder’s additional street address information (optional but recommended).
+                            city:
+                              type: string
+                              example: Los Angeles
+                              description: The card holder’s home city (optional but recommended).
+                            state:
+                              type: string
+                              example: CA
+                              description: The card holder’s home state (optional but recommended).
+                            zip:
+                              type: string
+                              example: "832044716"
+                              description: The card holder’s zip or postal code (optional, but recommended.)
+                            country:
+                              type: string
+                              example: USA
+                              description: The card holder’s home country (optional but recommended).
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                      "links": {
+                        "self": "x"
+                      },
+                      "data": {
+                        "type": "payments",
+                        "id": "{paymentId}",
+                        "attributes": {
+                          "paymentType": "card",
+                          "transaction": {
+                            "code": "0",
+                            "message": "Success",
+                            "amount": "500",
+                            "invoice": "123456",
+                            "currency": "USD",
+                            "authCode": "A11111",
+                            "avsResult": "T",
+                            "gross": "500",
+                            "net": "450",
+                            "grossMinusNet": "50",
+                            "fee": "35",
+                            "rate": "2.95"
+                          }
+                        }
+                      }
+                    }
+              schema:
+                type: object
+                properties:
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL for the current resource.
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: The type of transaction.
+                      id:
+                        type: string
+                        description: The payment transaction identification code.
+                      attributes:
+                        type: object
+                        description: A key for grouping payment identification data.
+                        properties:
+                          paymentType:
+                            type: string
+                            description: The application key.
+                          transaction:
+                            type: object
+                            description: A key for grouping payment identification data.
+                            properties:
+                              code:
+                                type: string
+                                description: The banking entity response code.
+                              message:
+                                type: string
+                                description: The status of the transaction.
+                              amount:
+                                type: string
+                                description: The transaction amount in dollars and cents.
+                              invoice:
+                                type: string
+                                description: The invoice number for the transaction.
+                              currency:
+                                type: string
+                                description: The currency used for the transaction.
+      deprecated: false
+    get:
+      summary: Get Payment List for Merchant
+      operationId: get-payment-list-for-merchant
+      description: >-
+        Use this endpoint to retrieve a list of transactions.
+
+        :::info Note
+
+        There are no request parameters for this endpoint, besides the merchantId in the URI.
+
+        :::
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Limit's the amount of items that can be returned.
+          example: '25'
+        - name: id
+          in: query
+          schema:
+            type: string
+          description: The merchantId to query results by.
+          example: "{{merchantId}}"
+      responses:
+        '200':
+          description: Successful response for getting payments
+          content:
+            application/json:
+              examples:
+                paymentIdWithBank:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "paymentIdWithBank"
+                        type: "payments"
+                        attributes:
+                          bank:
+                            routingNumber: "xxxx9593"
+                            bankName: "Wells Fargo"
+                            accountNumber: "xxxx4567"
+                            accountName: "MegaCorp"
+                            accountType: "checking"
+                          created: "2019-10-10T19:05:58.955Z"
+                          merchantId: "merchantId"
+                          paymentType: "ACH"
+                          transaction:
+                            amount: "3635"
+                            currency: "USD"
+                            invoice: "Payment-ACH-02"
+                            code: "0"
+                            message: "Success"
+                VoidId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "VoidId"
+                        type: "payments"
+                        attributes:
+                          created: "2019-10-10T18:49:55.628Z"
+                          merchantId: "merchantId"
+                          paymentType: "void"
+                          transaction:
+                            amount: "500"
+                            currency: "USD"
+                            code: "0"
+                            invoice: "123456"
+                            message: "Success"
+                cardPaymentId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "cardPaymentId"
+                        type: "payments"
+                        attributes:
+                          billingAddress:
+                            zip: "90210"
+                            country: "USA"
+                            state: "CA"
+                            line2: "Suite 007"
+                            city: "Los Angeles"
+                            line1: "21 Jump Street"
+                          card:
+                            number: "xxxx1685"
+                            holder: "Jane Doe"
+                            expiry: "0220"
+                            code: "xxx"
+                          created: "2019-10-10T18:49:35.311Z"
+                          merchantId: "merchantId"
+                          paymentType: "card"
+                          transaction:
+                            amount: "500"
+                            code: "0"
+                            authCode: "A11111"
+                            avsResult: "T"
+                            gross: "500"
+                            rate: "2.95"
+                            fee: "35"
+                            currency: "USD"
+                            invoice: "123456"
+                            message: "Success"
+                            net: "450"
+                            grossMinusNet: "50"
+                cardSplitId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "cardSplitId"
+                        type: "payments"
+                        attributes:
+                          card:
+                            number: "xxxx4426"
+                            holder: "Dinh Huyen"
+                            expiry: "1299"
+                            code: "xxx"
+                          created: "2019-10-10T18:45:05.688Z"
+                          merchantId: "merchantId"
+                          paymentType: "cardSplit"
+                          transaction:
+                            amount: "500"
+                            code: "0"
+                            authCode: "A11111"
+                            avsResult: "T"
+                            currency: "USD"
+                            invoice: "123456"
+                            message: "Success"
+                cardRefundId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "cardRefundId"
+                        type: "payments"
+                        attributes:
+                          created: "2019-10-10T18:40:37.793Z"
+                          merchantId: "merchantId"
+                          paymentType: "cardRefund"
+                          transaction:
+                            amount: "500"
+                            currency: "USD"
+                            code: "0"
+                            invoice: "123456"
+                            message: "Success"
+                secondSplitId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "secondSplitId"
+                        type: "payments"
+                        attributes:
+                          created: "2019-10-10T18:30:34.906Z"
+                          merchantId: "merchantId"
+                          paymentType: "secondSplit"
+                          transaction:
+                            message: "Success"
+                            amount: "100"
+                            code: "0"
+                tokenSplitId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "tokenSplitId"
+                        type: "payments"
+                        attributes:
+                          created: "2019-10-10T18:29:13.447Z"
+                          merchantId: "merchantId"
+                          paymentType: "tokenSplit"
+                          transaction:
+                            amount: "15000"
+                            currency: "USD"
+                            codeResult: "NotPresent"
+                            invoice: "123456"
+                            authCode: "A11111"
+                TokenPaymentId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "TokenPaymentId"
+                        type: "payments"
+                        attributes:
+                          created: "2019-10-10T18:24:01.141Z"
+                          merchantId: "merchantId"
+                          paymentType: "token"
+                          transaction:
+                            amount: "001"
+                            code: "0"
+                            authCode: null
+                            gross: null
+                            rate: null
+                            fee: null
+                            currency: "USD"
+                            codeResult: "NotPresent"
+                            invoice: "PAYMENT-TOKEN-7"
+                            message: "Success"
+                            net: null
+                            grossMinusNet: null
+                ACHPaymentId:
+                  value:
+                    links:
+                      self: "x"
+                      next: "x"
+                      note: "URL to call for next set"
+                    meta:
+                      items: 25
+                      count: 26
+                      limit: "25"
+                      more: true
+                    data:
+                      - id: "ACHPaymentId"
+                        type: "payments"
+                        attributes:
+                          created: "2019-10-10T18:20:50.905Z"
+                          merchantId: "merchantId"
+                          paymentType: "ACH"
+                          transaction:
+                            amount: "3635"
+                            currency: "USD"
+                            invoice: "Payment-ACH-02"
+                            code: "0"
+                            message: "Success"
+                            bank:
+                              routingNumber: "xxxx9593"
+                              bankName: "Wells Fargo"
+                              accountNumber: "xxxx4567"
+                              accountName: "MegaCorp"
+                              accountType: "checking"
+              schema:
+                type: object
+                properties:
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL for the current resource.
+                      next:
+                        type: string
+                        description: URL for the next set of data.
+                      note:
+                        type: string
+                        description: Note about the URL to call for the next set.
+                  meta:
+                    type: object
+                    properties:
+                      items:
+                        type: integer
+                        description: Number of items in the current set.
+                      count:
+                        type: integer
+                        description: Total count of items.
+                      limit:
+                        type: string
+                        description: Limit of items per set.
+                      more:
+                        type: boolean
+                        description: Indicates if there is more data available.
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Identifier for the payment entry.
+                        type:
+                          type: string
+                          description: Type of the payment entry.
+                        attributes:
+                          type: object
+                          description: Attributes associated with the payment entry.
+      deprecated: false
+  /payments/{cardpaymentId}:
+    get:
+      summary: Get Payment by Id
+      operationId: get-payment-by-id
+      description: >-
+        Use this endpoint to retrieve data from an existing transaction.
+
+        :::info Note
+        
+        There are no request parameters for this endpoint, besides the paymentId in the URI.
+
+        :::
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+        - name: cardpaymentId
+          description: Unique identifier of the payment.
+          in: path
+          example: "{{cardpaymentId}}"
+          schema:
+              type: string
+          required: true
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                      "links": {
+                        "self": "x"
+                      },
+                      "data": {
+                        "id": "{paymentId}",
+                        "attributes": {
+                          "merchantId": "{merchantId}",
+                          "created": "2019-10-10T18:49:35.311Z",
+                          "miscData": "test note",
+                          "billingAddress": {
+                            "zip": "90210",
+                            "country": "USA",
+                            "state": "CA",
+                            "line2": "Suite 007",
+                            "city": "Los Angeles",
+                            "line1": "21 Jump Street"
+                          },
+                          "transaction": {
+                            "amount": "500",
+                            "code": "0",
+                            "authCode": "A11111",
+                            "avsResult": "T",
+                            "gross": "500",
+                            "rate": "2.95",
+                            "fee": "35",
+                            "currency": "USD",
+                            "invoice": "123456",
+                            "message": "Success",
+                            "net": "450",
+                            "grossMinusNet": "50"
+                          },
+                          "card": {
+                            "number": "xxxx1685",
+                            "holder": "Jane Doe",
+                            "expiry": "0220",
+                            "code": "xxx"
+                          },
+                          "paymentType": "card"
+                        },
+                        "type": "payments"
+                      }
+                    }
+              schema:
+                type: object
+                properties:
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL for this set
+                      next:
+                        type: string
+                        description: URL for the next set
+                      note:
+                        type: string
+                        description: URL to call for the next set
+                  meta:
+                    type: object
+                    properties:
+                      items:
+                        type: integer
+                        description: Number of items in the response
+                      count:
+                        type: integer
+                        description: Total count of items
+                      limit:
+                        type: string
+                        description: Limit set for the number of items
+                      more:
+                        type: boolean
+                        description: Indicates if there are more items
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Payment transaction identification code
+                        attributes:
+                          type: object
+                          properties:
+                            billingAddress:
+                              type: object
+                              properties:
+                                zip:
+                                  type: string
+                                  description: The card holder’s zip or postal code
+                                country:
+                                  type: string
+                                  description: The card holder’s home country
+                                state:
+                                  type: string
+                                  description: The card holder’s home state
+                                line2:
+                                  type: string
+                                  description: The card holder’s street address (line 2)
+                                city:
+                                  type: string
+                                  description: The card holder’s home city
+                                line1:
+                                  type: string
+                                  description: The card holder’s street address (line 1)
+                            card:
+                              type: object
+                              properties:
+                                number:
+                                  type: string
+                                  description: The unique number assigned to an account
+                                holder:
+                                  type: string
+                                  description: The first and last name on the account
+                                expiry:
+                                  type: string
+                                  description: The expiration date of the payment method
+                                code:
+                                  type: string
+                                  description: The three-character CVV2 code
+                            created:
+                              type: string
+                              format: date-time
+                              description: The time/date when this transaction was created
+                            merchantId:
+                              type: string
+                              description: The merchant ID that this transaction belongs to
+                            paymentType:
+                              type: string
+                              description: The type of payment (card, ach, token, ...)
+                            transaction:
+                              type: object
+                              properties:
+                                amount:
+                                  type: string
+                                  description: The transaction amount in dollars and cents
+                                currency:
+                                  type: string
+                                  description: The currency used for the transaction
+                                invoice:
+                                  type: string
+                                  description: The invoice number for the transaction
+                                code:
+                                  type: string
+                                  description: The banking entity response code
+                                message:
+                                  type: string
+                                  description: The status of the transaction       
+      deprecated: false
+  /payments/status/{cardpaymentId}:
+    get:
+      summary: Get Payment Status by Id
+      operationId: get-payment-status-by-id
+      description: >-
+        Use this endpoint to retrieve data from an existing transaction.
+
+        :::info Note
+        
+        There are no request parameters for this endpoint, besides the paymentId in the URI.
+
+        :::
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+        - name: cardpaymentId
+          description: Unique identifier of the payment.
+          in: path
+          example: "{{cardpaymentId}}"
+          schema:
+              type: string
+          required: true
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              examples:
+                ok:
+                  value: |-
+                    {
+                      "links": {
+                        "self": ""
+                      },
+                      "data": {
+                        "id": "paymentId",
+                        "txnStatus": "CCDebitPending",
+                        "type": "payments"
+                      }
+                    }
+                Result:
+                  value: |-
+                    {
+                      "links": {
+                        "self": "x"
+                      },
+                      "data": {
+                        "id": "{paymentId}",
+                        "attributes": {
+                          "merchantId": "{merchantId}",
+                          "created": "2019-10-10T18:49:35.311Z",
+                          "miscData": "test note",
+                          "billingAddress": {
+                            "zip": "90210",
+                            "country": "USA",
+                            "state": "CA",
+                            "line2": "Suite 007",
+                            "city": "Los Angeles",
+                            "line1": "21 Jump Street"
+                          },
+                          "transaction": {
+                            "amount": "500",
+                            "code": "0",
+                            "authCode": "A11111",
+                            "avsResult": "T",
+                            "gross": "500",
+                            "rate": "2.95",
+                            "fee": "35",
+                            "currency": "USD",
+                            "invoice": "123456",
+                            "message": "Success",
+                            "net": "450",
+                            "grossMinusNet": "50"
+                          },
+                          "card": {
+                            "number": "xxxx1685",
+                            "holder": "Jane Doe",
+                            "expiry": "0220",
+                            "code": "xxx"
+                          },
+                          "paymentType": "card"
+                        },
+                        "type": "payments"
+                      }
+                    }
+              schema:
+                type: object
+                properties:
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL for this set
+                      next:
+                        type: string
+                        description: URL for the next set
+                      note:
+                        type: string
+                        description: URL to call for the next set
+                  meta:
+                    type: object
+                    properties:
+                      items:
+                        type: integer
+                        description: Number of items in the response
+                      count:
+                        type: integer
+                        description: Total count of items
+                      limit:
+                        type: string
+                        description: Limit set for the number of items
+                      more:
+                        type: boolean
+                        description: Indicates if there are more items
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Payment transaction identification code
+                        attributes:
+                          type: object
+                          properties:
+                            billingAddress:
+                              type: object
+                              properties:
+                                zip:
+                                  type: string
+                                  description: The card holder’s zip or postal code
+                                country:
+                                  type: string
+                                  description: The card holder’s home country
+                                state:
+                                  type: string
+                                  description: The card holder’s home state
+                                line2:
+                                  type: string
+                                  description: The card holder’s street address (line 2)
+                                city:
+                                  type: string
+                                  description: The card holder’s home city
+                                line1:
+                                  type: string
+                                  description: The card holder’s street address (line 1)
+                            card:
+                              type: object
+                              properties:
+                                number:
+                                  type: string
+                                  description: The unique number assigned to an account
+                                holder:
+                                  type: string
+                                  description: The first and last name on the account
+                                expiry:
+                                  type: string
+                                  description: The expiration date of the payment method
+                                code:
+                                  type: string
+                                  description: The three-character CVV2 code
+                            created:
+                              type: string
+                              format: date-time
+                              description: The time/date when this transaction was created
+                            merchantId:
+                              type: string
+                              description: The merchant ID that this transaction belongs to
+                            paymentType:
+                              type: string
+                              description: The type of payment (card, ach, token, ...)
+                            transaction:
+                              type: object
+                              properties:
+                                amount:
+                                  type: string
+                                  description: The transaction amount in dollars and cents
+                                currency:
+                                  type: string
+                                  description: The currency used for the transaction
+                                invoice:
+                                  type: string
+                                  description: The invoice number for the transaction
+                                code:
+                                  type: string
+                                  description: The banking entity response code
+                                message:
+                                  type: string
+                                  description: The status of the transaction       
+      deprecated: false
+  
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true
