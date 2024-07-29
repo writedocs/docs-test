@@ -1,0 +1,722 @@
+openapi: 3.1.0
+info:
+  title: Merchants
+  version: 1.0.0
+servers:
+  - url: https://test.digitzsapi.com/test
+tags:
+    - name: Authorization
+    - name: Payments
+    - name: Merchants
+components:
+  schemas:
+    data:
+      type: object
+      description: A key for grouping different types of API data.
+    APIcallType:
+      type: string
+      description: This API call type. This call must be `auth`.
+      default: auth
+    attributes:
+      type: object
+      description: A key for grouping data.
+    appId:
+      type: string
+      description: Supplied by Digitzs on onboarding.
+    appKey:
+      type: string
+      description: The key used to create an appToken with `/auth/token`.
+    appToken:
+      type: string
+      description: The `Authorization` header value to use for most API calls.
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: x-api-key
+security:
+  - sec0: []
+paths:
+  /merchants:
+    post:
+      summary: Create Merchant
+      operationId: create-merchant
+      description: >-
+        Use this endpoint to set up a new merchant account.
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: A key for grouping different types of API data.
+                  properties:
+                    type:
+                      type: string
+                      example: merchants
+                      description: The type of transaction. This value must be "merchants".
+                    attributes:
+                      type: object
+                      description: A key for grouping identification and payment information.
+                      properties:
+                        AVS:
+                          type: string
+                          example: Standard
+                          description: The AVS mode to set merchant to. Can be `Standard`, `Moderate`, or `Enhanced`.
+                        accountType:
+                          type: string
+                          example: business
+                          description: The type of bank account (personal or business). If set to business, enables and requires the businessInfo and businessAddress groupings.
+                        accountName:
+                          type: string
+                          example: ACME Enterprise
+                          description: The first and last name of the account holder, or if a business, use the business's name. This is also the Statement Descriptor that customers will see on their bank.
+                        personalInfo:
+                          type: object
+                          description: A key for grouping personal information.
+                          properties:
+                            firstName:
+                              type: string
+                              example: John
+                              description: The merchant’s first name.
+                            lastName:
+                              type: string
+                              example: Doe
+                              description: The merchant’s last name.
+                            email:
+                              type: string
+                              example: johndoe@email.com
+                              description: The merchant's email address.
+                            dayPhone:
+                              type: string
+                              example: "3105551222"
+                              description: The merchant’s daytime contact number.
+                            eveningPhone:
+                              type: string
+                              example: "3105551222"
+                              description: The merchant’s evening contact number.
+                            birthDate:
+                              type: string
+                              example: "01-01-1981"
+                              description: The merchant’s date of birth. Use "01-01-1981" for the test environment.
+                            socialSecurity:
+                              type: string
+                              example: "123456789"
+                              description: The merchant’s social security number.
+                        personalAddress:
+                          type: object
+                          description: A key for grouping personal address information.
+                          properties:
+                            line1:
+                              type: string
+                              example: 21 Jump Street
+                              description: The personal street address.
+                            line2:
+                              type: string
+                              example: Suite 007
+                              description: A second line for street address information.
+                            city:
+                              type: string
+                              example: Los Angeles
+                              description: The city where the individual is located.
+                            state:
+                              type: string
+                              example: CA
+                              description: The state where the individual is located. See State and Province Codes for more information.
+                            zip:
+                              type: string
+                              example: "90210"
+                              description: The postal code where the individual is located.
+                            country:
+                              type: string
+                              example: USA
+                              description: The three-character country code. See Country Codes for more information.
+                        businessInfo:
+                          type: object
+                          description: A key for grouping business information.
+                          properties:
+                            businessName:
+                              type: string
+                              example: Legal Name LLC
+                              description: The legal name of the business as registered.
+                            ein:
+                              type: string
+                              example: 123456789
+                              description: The Employer Identification Number (EIN).
+                            phone:
+                              type: string
+                              example: 5555555555
+                              description: The Business Phone Number (Optional).
+                            email:
+                              type: string
+                              example: test@email.co
+                              description: The Business Email (Optional).
+                            url:
+                              type: string
+                              example: https://test.com
+                              description: The Business's website URL (optional).
+                        businessAddress:
+                          type: object
+                          description: A key for grouping business address information.
+                          properties:
+                            line1:
+                              type: string
+                              example: 21 Jump Streets
+                              description: The business street address.
+                            line2:
+                              type: string
+                              example: Suite 007
+                              description: A second street address line.
+                            city:
+                              type: string
+                              example: Los ANgeles
+                              description: The city where the business is located.
+                            state:
+                              type: string
+                              example: CA
+                              description: The state where the business is located.
+                            zip:
+                              type: string
+                              example: "90210"
+                              description: The postal code where the business is located.
+                            country:
+                              type: string
+                              example: USA
+                              description: The three-character country code.
+                        bankInfo:
+                          type: object
+                          description: A key for grouping banking information.
+                          properties:
+                            bankName:
+                              type: string
+                              example: Bank of Abundance
+                              description: The name of the financial institution.
+                            accountOwnership:
+                              type: string
+                              example: business
+                              description: The valid values are Personal or Business.
+                            accountType:
+                              type: string
+                              example: checking
+                              description: The type of bank account (Checking or Savings).
+                            accountName:
+                              type: string
+                              example: doe's money account
+                              description: The Account name attached to the bank account. (Either account holder's name, or the business name)
+                            accountNumber:
+                              type: string
+                              example: "2341234321"
+                              description: The financial institution account number. It is required if boarding with the primary bank on file.
+                            routingNumber:
+                              type: string
+                              example: "000000000"
+                              description: The bank routing number. This is required if the payment method is checking or savings. Test environment requires a real routing number.
+                        verificationData:
+                          type: object
+                          description: A key for grouping server and timestamp information.
+                          properties:
+                            ipAddress:
+                              type: string
+                              example: "192.168.0.1"
+                              description: The IP address used for the transaction.
+                            emailVerified:
+                              type: boolean
+                              example: true
+                              description: A true or false value.
+                            emailVerifiedTimestamp:
+                              type: string
+                              example: "2016-01-31T11:16:07.234Z"
+                              format: date-time
+                              description: The date and time the email was sent.
+                            signature:
+                              type: string
+                              example: Huyen dinh
+                              description: The first and last name of the customer.
+                            signatureTimestamp:
+                              type: string
+                              example: "2016-01-31T11:16:07.234Z"
+                              format: date-time
+                              description: The date and time the transaction was authorized.
+                            termsAccepted:
+                              type: boolean
+                              example: true
+                              description: A true or false value.
+                        threatMatrixPolicy:
+                          type: string
+                          example: Default
+                          description: Defaults to `Default`, Policy to use for ThreatMetrix (optional).
+                        threatMetrixSessionId:
+                          type: string
+                          example: x
+                          description: A unique identifier (preferably uuidv4), previously used for ThreatMetrix Embed. See the ThreatMetrix documentation for more information (optional).
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              examples:
+                Created:
+                  value: |-
+                    {
+                      "links": {
+                        "self": "x"
+                      },
+                      "data": {
+                        "type": "merchants",
+                        "id": "merchantId"
+                      }
+                    }
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: A key for grouping different types of API data.
+                    properties:
+                      type:
+                        type: string
+                        description: The type of transaction. This value must be "merchants".
+                      id:
+                        type: string
+                        description: A merchant identifier. This is the account where the split goes after the transaction settles.
+    get:
+      summary: Get Merchant List
+      operationId: get-merchant-list
+      description: >-
+        Use this endpoint to view a list of the merchants.
+
+        :::info Note
+        
+        There are no request parameters for this endpoint, Also change
+        `limit` in the URI to whatever integer value of items you want to
+        receive.
+
+        :::
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+        - name: limit
+          in: query
+          schema:
+            type: integer
+          description: Limit's the amount of items that will be returned.
+          example: 25
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              examples:
+                ok:
+                  value: |-
+                    {
+                      "link": {
+                        "self": "x"
+                      },
+                      "meta": {
+                        "limit": 25,
+                        "items": 25,
+                        "more": true
+                      },
+                      "data": [
+                        {
+                          "id": "merchantId",
+                          "attributes": {
+                            "accountName": "Huyen Dinh",
+                            "accountType": "business",
+                            "created": "2019-10-10T19:27:00.680Z"
+                          },
+                          "type": "merchants"
+                        }
+                      ]
+                    }
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    description: A key for grouping different types of API data.
+                    properties:
+                      items:
+                        type: integer
+                        description: The number of items in the database. It is equal to or smaller than the limit’s value.
+                      limit:
+                        type: string
+                        description: The maximum number of results to return.
+                      more:
+                        type: boolean
+                        description: A true/false value that indicates whether “items” or “limit” allows more results.
+                  data:
+                    type: array
+                    description: A key for grouping results.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The merchant identification string in Digitzs.
+                        attributes:
+                          type: object
+                          description: A key for grouping identification and payment information.
+                          properties:
+                            accountName:
+                              type: string
+                              description: The name of the individual or business associated with the account.
+                            accountType:
+                              type: string
+                              description: The account type (Personal or Business).
+                            created:
+                              type: string
+                              format: date-time
+                              description: The date and time that the payment was created.
+                            type:
+                              type: string
+                              description: The transaction type. Must equal “merchants”.
+  /merchants/{merchantId}:
+    get:
+      summary: Get Merchant by Id
+      operationId: get-merchant-by-id
+      description: >-
+        Use this endpoint to view information about a specific merchant.
+
+        :::info Note
+
+        There are no request parameters for this endpoint.
+
+        :::
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+        - name: merchantId
+          in: path
+          schema:
+            type: string
+          description: The unique identifier of the merchant being searched.
+          example: 'xxxxxx'
+          required: true
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              examples:
+                ok:
+                  value: |-
+                    {
+                      "links": {
+                        "self": "x"
+                      },
+                      "data": {
+                        "type": "merchants",
+                        "id": "merchantId",
+                        "attributes": {
+                          "accountName": "Tuan Ngoc",
+                          "accountType": "business",
+                          "personalInfo": {
+                            "eveningPhone": "3105551222",
+                            "firstName": "Tuan",
+                            "lastName": "Ngoc",
+                            "dayPhone": "1234564324",
+                            "socialSecurity": "xxxx6789",
+                            "birthDate": "xxxx2000",
+                            "email": "Ngoc@centralfax.co.uk"
+                          },
+                          "bankInfo": {
+                            "routingNumber": "xxxx9593",
+                            "bankName": "VCB",
+                            "accountNumber": "xxxx4567",
+                            "accountName": "LuongDung",
+                            "accountOwnership": "business",
+                            "accountType": "savings"
+                          },
+                          "verificationData": {
+                            "ipAddress": "192.168.100.14/23",
+                            "emailVerified": true,
+                            "signature": "LuongDung",
+                            "emailVerifiedTimestamp": "2016-01-31T11:16:07.234Z",
+                            "signatureTimestamp": "2016-01-31T11:16:07.234Z"
+                          },
+                          "created": "2019-09-26T08:15:12.752Z",
+                          "partnerId": "corsourc-152910534",
+                          "businessAddress": {
+                            "zip": "90210",
+                            "country": "USA",
+                            "state": "CA",
+                            "line2": "Suite 007",
+                            "city": "Los Angeles",
+                            "line1": "21 Jump Streets"
+                          },
+                          "personalAddress": {
+                            "zip": "90210",
+                            "country": "USA",
+                            "state": "CA",
+                            "line2": "Suite 007",
+                            "city": "Los Angeles",
+                            "line1": "21 Jump Street"
+                          },
+                          "businessInfo": {
+                            "businessName": "TuanNgoc",
+                            "ein": "xxxx6789"
+                          }
+                        }
+                      }
+                    }
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: A key for grouping different types of API data. See Objects for more information.
+                    properties:
+                      id:
+                        type: string
+                        description: Merchant Identification string for Digitzs.
+                      type:
+                        type: string
+                        description: The type of transaction. This value must be "merchants".
+                      attributes:
+                        type: object
+                        description: A key for grouping identification and payment information.
+                        properties:
+                          accountType:
+                            type: string
+                            description: The type of bank account (Checking or Savings).
+                          accountName:
+                            type: string
+                            description: The first and last name of the account holder.
+                          personalInfo:
+                            type: object
+                            description: A key for grouping personal information.
+                            properties:
+                              firstName:
+                                type: string
+                                description: The merchant’s first name.
+                              lastName:
+                                type: string
+                                description: The merchant’s last name.
+                              email:
+                                type: string
+                                description: The merchant's email address.
+                              dayPhone:
+                                type: string
+                                description: The merchant’s daytime contact number.
+                              eveningPhone:
+                                type: string
+                                description: The merchant’s evening contact number.
+                              birthDate:
+                                type: string
+                                description: The merchant’s date of birth.
+                              socialSecurity:
+                                type: string
+                                description: The merchant’s social security number.
+                              personalAddress:
+                                type: object
+                                description: A key for grouping personal address information.
+                                properties:
+                                  line1:
+                                    type: string
+                                    description: The personal street address.
+                                  line2:
+                                    type: string
+                                    description: A second line for street address information.
+                                  city:
+                                    type: string
+                                    description: The city where the individual is located.
+                                  state:
+                                    type: string
+                                    description: The state where the individual is located.
+                                  zip:
+                                    type: string
+                                    description: The postal code where the individual is located.
+                                  country:
+                                    type: string
+                                    description: The three-character country code.
+                              businessInfo:
+                                type: object
+                                description: A key for grouping business information.
+                                properties:
+                                  businessName:
+                                    type: string
+                                    description: The legal name of the business as registered.
+                                  ein:
+                                    type: string
+                                    description: The Employer Identification Number (EIN).
+                                  businessAddress:
+                                    type: object
+                                    description: A key for grouping business address information.
+                                    properties:
+                                      line1:
+                                        type: string
+                                        description: The business street address.
+                                      line2:
+                                        type: string
+                                        description: A second street address line.
+                                      city:
+                                        type: string
+                                        description: The city where the business is located.
+                                      state:
+                                        type: string
+                                        description: The state where the business is located.
+                                      zip:
+                                        type: string
+                                        description: The postal code where the business is located.
+                                      country:
+                                        type: string
+                                        description: The three-character country code.
+                              bankInfo:
+                                type: object
+                                description: A key for grouping banking information.
+                                properties:
+                                  bankName:
+                                    type: string
+                                    description: The name of the financial institution.
+                                  accountOwnership:
+                                    type: string
+                                    description: The valid values are Personal or Business.
+                                  accountType:
+                                    type: string
+                                    description: The type of bank account (Checking or Savings).
+                                  accountName:
+                                    type: string
+                                    description: The first and last name of the account holder or the business Name.
+                                  accountNumber:
+                                    type: string
+                                    description: The financial institution account number. It is required if boarding with the primary bank on file.
+                                  routingNumber:
+                                    type: string
+                                    description: The bank routing number. This is required if the payment method is checking or savings.
+                              verificationData:
+                                type: object
+                                description: A key for grouping server and timestamp information.
+                                properties:
+                                  ipAddress:
+                                    type: string
+                                    description: The IP address used for the transaction.
+                                  emailVerified:
+                                    type: boolean
+                                    description: A true or false value.
+                                  emailVerifiedTimestamp:
+                                    type: string
+                                    description: The date and time the email was sent.
+                                  signature:
+                                    type: string
+                                    description: The first and last name of the customer.
+                                  signatureTimestamp:
+                                    type: string
+                                    description: The date and time the transaction was authorized.
+                                  termsAccepted:
+                                    type: boolean
+                                    description: A true or false value.
+    put:
+      summary: Update Merchant's AVS Mode
+      operationId: update-merchant
+      description: >-
+        Use this endpoint to update the AVS mode for the specified merchant.
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          description: >-
+            appToken created by `/auth/token`
+
+            <small>Format:  `Bearer xxxxxx...`</small>
+          example: Bearer <appToken>
+        - name: merchantId
+          in: path
+          schema:
+            type: string
+          description: The unique identifier of the merchant being updated.
+          example: 'xxxxxx'
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  description: A key for grouping different types of API data. See Objects for more information.
+                  properties:
+                    type:
+                      type: string
+                      example: merchants
+                      description: The type of transaction. This value must be "merchants".
+                    attributes:
+                      type: object
+                      description: A key for grouping identification and payment information.
+                      properties:
+                        group:
+                          type: string
+                          example: AVS
+                          description: Must be `AVS` for updating the merchant's AVS setting. Enables `AVS` key.
+                        AVS:
+                          type: string
+                          example: Enhanced
+                          description: The AVS mode to set the merchant to. Can be `Standard`, `Moderate`, or `Enhanced`.
+      responses:
+        '200':
+          description: 'Ok'
+          content:
+            application/json:
+              examples:
+                ok:
+                  value: |-
+                    {
+                      "links": {
+                        "self": "x"
+                      },
+                      "data": {
+                        "type": "merchants",
+                        "id": "merchantId"
+                      }
+                    }
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: A key for grouping different types of API data.
+                    properties:
+                      type:
+                        type: string
+                        description: The type of transaction. This value must be "merchants".
+                      id:
+                        type: string
+                        description: A merchant identifier. This is the account where the split goes after the transaction settles.
+
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true
