@@ -8,7 +8,7 @@ on:
       - "config.json"
 
 jobs:
-  reset-api-docs:
+  reset-custom-css:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +33,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git add custom.css
+          git add src/css/custom.css
           git commit -m "Update custom.css based on changes in config.json"
 
       - name: Push changes
