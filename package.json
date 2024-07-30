@@ -6,6 +6,7 @@
     "docusaurus": "docusaurus",
     "prestart": "node sidebar.config.js",
     "prebuild": "node sidebar.config.js",
+    "styles": "node styles.config.js",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
