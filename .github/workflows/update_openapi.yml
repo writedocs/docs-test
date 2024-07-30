@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: "20"
 
-      # - name: Install Dependencies
-      #   run: npm install
+      - name: Install Dependencies
+        run: npm install docusaurus
 
       - name: Clean and Generate API Docs
         run: npx docusaurus clean-api-docs all && npx docusaurus gen-api-docs all
