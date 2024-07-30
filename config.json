@@ -1,4 +1,12 @@
 {
+  "websiteName": "Project Name",
+  "organizationName": "MyCompany",
+  "repositoryName": "my-repo-name",
+  "description": "Project Description",
+  "images": {
+    "logo": "img/small-logo.png",
+    "favicon": "img/favicon.ico"
+  },
   "styles": {
     "mainColor": "#744ffe",
     "secondaryColor": "#744ffa"
