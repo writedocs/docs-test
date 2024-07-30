@@ -2,36 +2,115 @@
   "sidebar": {
     "docs": [
       {
-        "category": "category1",
+        "category": "Getting Started",
         "pages": [
           "getting-started/what-is-deets",
           "getting-started/start-using-deets",
-          "getting-started/onboard-merchants",
+          "getting-started/onboard-merchants"
+        ]
+      },
+      {
+        "category": "Integration",
+        "pages": [
+          "integration/overview",
           {
-            "page": "integration/integrating-deets-iframe",
-            "label": "Integrating Deets iFrame",
-            "subpages": [
-              "integration/events",
-              "integration/function"
+            "page": "integration/create-a-token",
+            "label": "Create a Token",
+            "pages": [
+              "integration/iframe-configuration-object",
+              {
+                "page": "integration/integrating-deets-iframe",
+                "label": "Integrating Deets iFrame",
+                "pages": [
+                  "integration/events",
+                  "integration/function"
+                ]
+              },
+              "integration/styling-the-iframe"
+            ]
+          },
+          {
+            "page": "integration/create-a-payment",
+            "label": "Create a Payment",
+            "pages": [
+              "integration/payment-types"
             ]
           }
+        ]
+      },
+      {
+        "category": "Additional Information",
+        "pages": [
+          "additional-information/pci-compliance",
+          "additional-information/tokenization"
         ]
       }
     ],
     "apiReference": [
       {
-        "category": "category1",
+        "category": "Authorization",
         "pages": [
-          "getting-started/what-is-deets",
-          "getting-started/start-using-deets",
-          "getting-started/onboard-merchants",
           {
-            "page": "integration/integrating-deets-iframe",
-            "label": "Integrating Deets iFrame",
-            "subpages": [
-              "integration/events",
-              "integration/function"
-            ]
+            "page": "api-reference/authorization/create-api-key",
+            "apiMethod": "post"
+          },
+          {
+            "page": "api-reference/authorization/create-app-token",
+            "apiMethod": "post"
+          }
+        ]
+      },
+      {
+        "category": "Merchants",
+        "pages": [
+          {
+            "page": "api-reference/merchants/create-merchant",
+            "apiMethod": "post"
+          },
+          {
+            "page": "api-reference/merchants/get-merchant-list",
+            "apiMethod": "get"
+          },
+          {
+            "page": "api-reference/merchants/get-merchant-by-id",
+            "apiMethod": "get"
+          },
+          {
+            "page": "api-reference/merchants/update-merchant",
+            "apiMethod": "put"
+          }
+        ]
+      },
+      {
+        "category": "Payments",
+        "pages": [
+          {
+            "page": "api-reference/payments/create-payments",
+            "apiMethod": "post"
+          },
+          {
+            "page": "api-reference/payment-split/create-split-payments",
+            "apiMethod": "post"
+          },
+          {
+            "page": "api-reference/refund-split/refund-split-payments",
+            "apiMethod": "post"
+          },
+          {
+            "page": "api-reference/refund/refund-payments",
+            "apiMethod": "post"
+          },
+          {
+            "page": "api-reference/payments/get-payment-list-for-merchant",
+            "apiMethod": "get"
+          },
+          {
+            "page": "api-reference/payments/get-payment-by-id",
+            "apiMethod": "get"
+          },
+          {
+            "page": "api-reference/payments/get-payment-status-by-id",
+            "apiMethod": "get"
           }
         ]
       }

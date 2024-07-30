@@ -1,5 +1,42 @@
 const fs = require('fs');
 
+function processPage(item, outputArray) {
+  if (typeof item === 'string') {
+    // Simple page
+    outputArray.push({
+      type: 'doc',
+      id: item
+    });
+  } else if (typeof item === 'object' && item.page) {
+    // Category or API Method with subpages
+    if (item.apiMethod) {
+      // API Method page
+      outputArray.push({
+        type: 'doc',
+        id: item.page,
+        className: `api-method ${item.apiMethod}`
+      });
+    } else {
+      // Category with subpages
+      const category = {
+        type: 'category',
+        label: item.label,
+        link: {
+          type: 'doc',
+          id: item.page
+        },
+        items: []
+      };
+
+      item.pages.forEach(subItem => {
+        processPage(subItem, category.items);
+      });
+
+      outputArray.push(category);
+    }
+  }
+}
+
 function transformSidebar(inputPath, outputPath) {
   fs.readFile(inputPath, 'utf8', (err, data) => {
     if (err) {
@@ -18,38 +55,20 @@ function transformSidebar(inputPath, outputPath) {
 
         sectionContent.forEach(category => {
           const categoryName = category.category;
-          const pages = category.pages;
-
-          pages.forEach(item => {
-            if (typeof item === 'string') {
-              sidebars[sectionName].push({
-                type: 'doc',
-                id: item
-              });
-            } else if (typeof item === 'object' && item.page && item.subpages) {
-              sidebars[sectionName].push({
-                type: 'category',
-                label: item.label,
-                link: {
-                  type: 'doc',
-                  id: item.page
-                },
-                items: item.subpages
-              });
-            }
-          });
-
-          // Adding the category title
-          sidebars[sectionName].unshift({
+          const categoryTitle = {
             type: 'html',
             value: `<span class='sidebar_title'>${categoryName}</span>`,
             defaultStyle: true,
             className: 'sidebar_title',
+          };
+          sidebars[sectionName].push(categoryTitle);
+
+          category.pages.forEach(item => {
+            processPage(item, sidebars[sectionName]);
           });
         });
       });
 
-      // Write the output to sidebars.js
       const outputContent = `module.exports = ${JSON.stringify(sidebars, null, 2)};`;
       fs.writeFile(outputPath, outputContent, 'utf8', (err) => {
         if (err) {
@@ -64,7 +83,6 @@ function transformSidebar(inputPath, outputPath) {
   });
 }
 
-// Usage example (you can set the actual paths according to your project structure)
 transformSidebar('config.json', 'sidebars.js');
 
 module.exports = transformSidebar;
