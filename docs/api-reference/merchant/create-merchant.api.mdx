@@ -1,0 +1,938 @@
+---
+id: create-merchant
+title: "Create Merchant"
+description: "Use this endpoint to set up a new merchant account."
+sidebar_label: "Create Merchant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: api-reference/merchant/merchants
+custom_edit_url: null
+proxy: https://proxy.writechoice.io/
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import Heading from "@theme/Heading";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create Merchant"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/merchants"}
+>
+  
+</MethodEndpoint>
+
+
+
+Use this endpoint to set up a new merchant account.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<details
+  style={{"marginBottom":"1rem"}}
+  className={"openapi-markdown__details"}
+  data-collapsed={false}
+  open={true}
+>
+  <summary
+    style={{}}
+  >
+    <h3
+      className={"openapi-markdown__details-summary-header-params"}
+    >
+      Header Parameters
+    </h3>
+  </summary><div>
+    <ul>
+      <ParamsItem
+        className={"paramsItem"}
+        param={{"name":"Authorization","in":"header","schema":{"type":"string"},"description":"appToken created by `/auth/token`\n<small>Format:  `Bearer xxxxxx...`</small>","example":"Bearer <appToken>"}}
+      >
+        
+      </ParamsItem>
+    </ul>
+  </div>
+</details><MimeTabs
+  className={"openapi-tabs__mime"}
+>
+  <TabItem
+    label={"application/json"}
+    value={"application/json-schema"}
+  >
+    <details
+      style={{}}
+      className={"openapi-markdown__details mime"}
+      data-collapsed={false}
+      open={true}
+    >
+      <summary
+        style={{}}
+        className={"openapi-markdown__details-summary-mime"}
+      >
+        <h3
+          className={"openapi-markdown__details-summary-header-body"}
+        >
+          Body
+        </h3><strong
+          className={"openapi-schema__required"}
+        >
+          required
+        </strong>
+      </summary><div
+        style={{"textAlign":"left","marginLeft":"1rem"}}
+      >
+        
+      </div><ul
+        style={{"marginLeft":"1rem"}}
+      >
+        <SchemaItem
+          collapsible={true}
+          className={"schemaItem"}
+        >
+          <details
+            style={{}}
+            className={"openapi-markdown__details"}
+          >
+            <summary
+              style={{}}
+            >
+              <span
+                className={"openapi-schema__container"}
+              >
+                <strong
+                  className={"openapi-schema__property"}
+                >
+                  data
+                </strong><span
+                  className={"openapi-schema__name"}
+                >
+                   object
+                </span>
+              </span>
+            </summary><div
+              style={{"marginLeft":"1rem"}}
+            >
+              <div
+                style={{"marginTop":".5rem","marginBottom":".5rem"}}
+              >
+                
+                
+                A key for grouping different types of API data.
+                
+                
+              </div><SchemaItem
+                collapsible={false}
+                name={"type"}
+                required={false}
+                schemaName={"string"}
+                qualifierMessage={undefined}
+                schema={{"type":"string","example":"merchants","description":"The type of transaction. This value must be \"merchants\"."}}
+              >
+                
+              </SchemaItem><SchemaItem
+                collapsible={true}
+                className={"schemaItem"}
+              >
+                <details
+                  style={{}}
+                  className={"openapi-markdown__details"}
+                >
+                  <summary
+                    style={{}}
+                  >
+                    <span
+                      className={"openapi-schema__container"}
+                    >
+                      <strong
+                        className={"openapi-schema__property"}
+                      >
+                        attributes
+                      </strong><span
+                        className={"openapi-schema__name"}
+                      >
+                         object
+                      </span>
+                    </span>
+                  </summary><div
+                    style={{"marginLeft":"1rem"}}
+                  >
+                    <div
+                      style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                    >
+                      
+                      
+                      A key for grouping identification and payment information.
+                      
+                      
+                    </div><SchemaItem
+                      collapsible={false}
+                      name={"AVS"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"Standard","description":"The AVS mode to set merchant to. Can be `Standard`, `Moderate`, or `Enhanced`."}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={false}
+                      name={"accountType"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"business","description":"The type of bank account (personal or business). If set to business, enables and requires the businessInfo and businessAddress groupings."}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={false}
+                      name={"accountName"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"ACME Enterprise","description":"The first and last name of the account holder, or if a business, use the business's name. This is also the Statement Descriptor that customers will see on their bank."}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              personalInfo
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping personal information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"firstName"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"John","description":"The merchant’s first name."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"lastName"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Doe","description":"The merchant’s last name."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"email"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"johndoe@email.com","description":"The merchant's email address."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"dayPhone"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"3105551222","description":"The merchant’s daytime contact number."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"eveningPhone"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"3105551222","description":"The merchant’s evening contact number."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"birthDate"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"01-01-1981","description":"The merchant’s date of birth. Use \"01-01-1981\" for the test environment."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"socialSecurity"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"123456789","description":"The merchant’s social security number."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              personalAddress
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping personal address information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"line1"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"21 Jump Street","description":"The personal street address."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"line2"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Suite 007","description":"A second line for street address information."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"city"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Los Angeles","description":"The city where the individual is located."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"state"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"CA","description":"The state where the individual is located. See State and Province Codes for more information."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"zip"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"90210","description":"The postal code where the individual is located."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"country"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"USA","description":"The three-character country code. See Country Codes for more information."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              businessInfo
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping business information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"businessName"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Legal Name LLC","description":"The legal name of the business as registered."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"ein"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":123456789,"description":"The Employer Identification Number (EIN)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"phone"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":5555555555,"description":"The Business Phone Number (Optional)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"email"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"test@email.co","description":"The Business Email (Optional)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"url"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"https://test.com","description":"The Business's website URL (optional)."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              businessAddress
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping business address information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"line1"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"21 Jump Streets","description":"The business street address."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"line2"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Suite 007","description":"A second street address line."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"city"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Los ANgeles","description":"The city where the business is located."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"state"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"CA","description":"The state where the business is located."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"zip"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"90210","description":"The postal code where the business is located."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"country"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"USA","description":"The three-character country code."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              bankInfo
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping banking information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"bankName"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Bank of Abundance","description":"The name of the financial institution."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"accountOwnership"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"business","description":"The valid values are Personal or Business."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"accountType"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"checking","description":"The type of bank account (Checking or Savings)."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"accountName"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"doe's money account","description":"The Account name attached to the bank account. (Either account holder's name, or the business name)"}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"accountNumber"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"2341234321","description":"The financial institution account number. It is required if boarding with the primary bank on file."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"routingNumber"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"000000000","description":"The bank routing number. This is required if the payment method is checking or savings. Test environment requires a real routing number."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={true}
+                      className={"schemaItem"}
+                    >
+                      <details
+                        style={{}}
+                        className={"openapi-markdown__details"}
+                      >
+                        <summary
+                          style={{}}
+                        >
+                          <span
+                            className={"openapi-schema__container"}
+                          >
+                            <strong
+                              className={"openapi-schema__property"}
+                            >
+                              verificationData
+                            </strong><span
+                              className={"openapi-schema__name"}
+                            >
+                               object
+                            </span>
+                          </span>
+                        </summary><div
+                          style={{"marginLeft":"1rem"}}
+                        >
+                          <div
+                            style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                          >
+                            
+                            
+                            A key for grouping server and timestamp information.
+                            
+                            
+                          </div><SchemaItem
+                            collapsible={false}
+                            name={"ipAddress"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"192.168.0.1","description":"The IP address used for the transaction."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"emailVerified"}
+                            required={false}
+                            schemaName={"boolean"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"boolean","example":true,"description":"A true or false value."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"emailVerifiedTimestamp"}
+                            required={false}
+                            schemaName={"date-time"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"2016-01-31T11:16:07.234Z","format":"date-time","description":"The date and time the email was sent."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"signature"}
+                            required={false}
+                            schemaName={"string"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"Huyen dinh","description":"The first and last name of the customer."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"signatureTimestamp"}
+                            required={false}
+                            schemaName={"date-time"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"string","example":"2016-01-31T11:16:07.234Z","format":"date-time","description":"The date and time the transaction was authorized."}}
+                          >
+                            
+                          </SchemaItem><SchemaItem
+                            collapsible={false}
+                            name={"termsAccepted"}
+                            required={false}
+                            schemaName={"boolean"}
+                            qualifierMessage={undefined}
+                            schema={{"type":"boolean","example":true,"description":"A true or false value."}}
+                          >
+                            
+                          </SchemaItem>
+                        </div>
+                      </details>
+                    </SchemaItem><SchemaItem
+                      collapsible={false}
+                      name={"threatMatrixPolicy"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"Default","description":"Defaults to `Default`, Policy to use for ThreatMetrix (optional)."}}
+                    >
+                      
+                    </SchemaItem><SchemaItem
+                      collapsible={false}
+                      name={"threatMetrixSessionId"}
+                      required={false}
+                      schemaName={"string"}
+                      qualifierMessage={undefined}
+                      schema={{"type":"string","example":"x","description":"A unique identifier (preferably uuidv4), previously used for ThreatMetrix Embed. See the ThreatMetrix documentation for more information (optional)."}}
+                    >
+                      
+                    </SchemaItem>
+                  </div>
+                </details>
+              </SchemaItem>
+            </div>
+          </details>
+        </SchemaItem>
+      </ul>
+    </details>
+  </TabItem>
+</MimeTabs><div>
+  <div>
+    <ApiTabs
+      label={undefined}
+      id={undefined}
+    >
+      <TabItem
+        label={"201"}
+        value={"201"}
+      >
+        <div>
+          
+          
+          Created
+          
+          
+        </div><div>
+          <MimeTabs
+            className={"openapi-tabs__mime"}
+            schemaType={"response"}
+          >
+            <TabItem
+              label={"application/json"}
+              value={"application/json"}
+            >
+              <SchemaTabs
+                className={"openapi-tabs__schema"}
+              >
+                <TabItem
+                  label={"Schema"}
+                  value={"Schema"}
+                >
+                  <details
+                    style={{}}
+                    className={"openapi-markdown__details response"}
+                    data-collapsed={false}
+                    open={true}
+                  >
+                    <summary
+                      style={{}}
+                      className={"openapi-markdown__details-summary-response"}
+                    >
+                      <strong>
+                        Schema
+                      </strong>
+                    </summary><div
+                      style={{"textAlign":"left","marginLeft":"1rem"}}
+                    >
+                      
+                    </div><ul
+                      style={{"marginLeft":"1rem"}}
+                    >
+                      <SchemaItem
+                        collapsible={true}
+                        className={"schemaItem"}
+                      >
+                        <details
+                          style={{}}
+                          className={"openapi-markdown__details"}
+                        >
+                          <summary
+                            style={{}}
+                          >
+                            <span
+                              className={"openapi-schema__container"}
+                            >
+                              <strong
+                                className={"openapi-schema__property"}
+                              >
+                                data
+                              </strong><span
+                                className={"openapi-schema__name"}
+                              >
+                                 object
+                              </span>
+                            </span>
+                          </summary><div
+                            style={{"marginLeft":"1rem"}}
+                          >
+                            <div
+                              style={{"marginTop":".5rem","marginBottom":".5rem"}}
+                            >
+                              
+                              
+                              A key for grouping different types of API data.
+                              
+                              
+                            </div><SchemaItem
+                              collapsible={false}
+                              name={"type"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"The type of transaction. This value must be \"merchants\"."}}
+                            >
+                              
+                            </SchemaItem><SchemaItem
+                              collapsible={false}
+                              name={"id"}
+                              required={false}
+                              schemaName={"string"}
+                              qualifierMessage={undefined}
+                              schema={{"type":"string","description":"A merchant identifier. This is the account where the split goes after the transaction settles."}}
+                            >
+                              
+                            </SchemaItem>
+                          </div>
+                        </details>
+                      </SchemaItem>
+                    </ul>
+                  </details>
+                </TabItem><TabItem
+                  label={"Example (from schema)"}
+                  value={"Example (from schema)"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\"\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem><TabItem
+                  label={"Created"}
+                  value={"Created"}
+                >
+                  <ResponseSamples
+                    responseExample={"{\n  \"links\": {\n    \"self\": \"x\"\n  },\n  \"data\": {\n    \"type\": \"merchants\",\n    \"id\": \"merchantId\"\n  }\n}"}
+                    language={"json"}
+                  >
+                    
+                  </ResponseSamples>
+                </TabItem>
+              </SchemaTabs>
+            </TabItem>
+          </MimeTabs>
+        </div>
+      </TabItem>
+    </ApiTabs>
+  </div>
+</div>
+      

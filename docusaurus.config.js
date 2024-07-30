@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 import {themes as prismThemes} from 'prism-react-renderer';
 import fs from 'fs';
+import path from 'path';
 
 function getFirstPageFromJson(filePath, sectionName) {
   try {
@@ -39,6 +40,35 @@ function getFirstPageFromJson(filePath, sectionName) {
     console.error('Error reading or parsing JSON file:', error);
     return null;
   }
+}
+
+function createOpenApiConfig() {
+  const directoryPath = 'openapi';
+  const proxyUrl = 'https://proxy.writechoice.io/';
+  const outputBaseDir = 'docs/api-reference';
+
+  // Read the files in the openapi directory
+  const files = fs.readdirSync(directoryPath);
+
+  const config = files.reduce((acc, file) => {
+    const fileName = path.parse(file).name; // Get the base name without extension
+    const specPath = `${directoryPath}/${file}`;
+    const outputDir = `${outputBaseDir}/${fileName.replace('_', '-')}`;
+
+    acc[fileName] = {
+      specPath,
+      proxy: proxyUrl,
+      outputDir,
+    };
+
+    return acc;
+  }, {});
+
+  return {
+    id: 'openapi',
+    docsPluginId: 'classic',
+    config,
+  };
 }
 
 /** @type {import('@docusaurus/types').Config} */
@@ -212,50 +242,43 @@ const config = {
       }],
       [
         "docusaurus-plugin-openapi-docs",
-        {
-          id: "openapi",
-          docsPluginId: "classic",
-          config: {
-            /*petstore: {
-              specPath: "openapi-files/petstore.yaml",
-              outputDir: "docs/petstore",
-              sidebarOptions: {
-                groupPathsBy: "tag",
-                categoryLinkSource: "tag",
-              },
-            },*/
-            authorization: {
-              specPath: "openapi-files/authorization.yml",
-              proxy: "https://proxy.writechoice.io/",
-              outputDir: "docs/api-reference/authorization",
-            },
-            merchants: {
-              specPath: "openapi-files/merchant.yml",
-              proxy: "https://proxy.writechoice.io/",
-              outputDir: "docs/api-reference/merchants",
-            },
-            payments: {
-              specPath: "openapi-files/payments.yml",
-              proxy: "https://proxy.writechoice.io/",
-              outputDir: "docs/api-reference/payments",
-            },
-            paymentsplit: {
-              specPath: "openapi-files/payment-split.yml",
-              proxy: "https://proxy.writechoice.io/",
-              outputDir: "docs/api-reference/payment-split",
-            },
-            refundSplit: {
-              specPath: "openapi-files/refund-split.yml",
-              proxy: "https://proxy.writechoice.io/",
-              outputDir: "docs/api-reference/refund-split",
-            },
-            refund: {
-              specPath: "openapi-files/refund.yml",
-              proxy: "https://proxy.writechoice.io/",
-              outputDir: "docs/api-reference/refund",
-            },
-          } 
-        },
+        createOpenApiConfig()
+        // {
+        //   id: "openapi",
+        //   docsPluginId: "classic",
+        //   config: {
+        //     authorization: {
+        //       specPath: "openapi/authorization.yml",
+        //       proxy: "https://proxy.writechoice.io/",
+        //       outputDir: "docs/api-reference/authorization",
+        //     },
+        //     merchants: {
+        //       specPath: "openapi/merchant.yml",
+        //       proxy: "https://proxy.writechoice.io/",
+        //       outputDir: "docs/api-reference/merchants",
+        //     },
+        //     payments: {
+        //       specPath: "openapi/payments.yml",
+        //       proxy: "https://proxy.writechoice.io/",
+        //       outputDir: "docs/api-reference/payments",
+        //     },
+        //     paymentsplit: {
+        //       specPath: "openapi/payment-split.yml",
+        //       proxy: "https://proxy.writechoice.io/",
+        //       outputDir: "docs/api-reference/payment-split",
+        //     },
+        //     refundSplit: {
+        //       specPath: "openapi/refund-split.yml",
+        //       proxy: "https://proxy.writechoice.io/",
+        //       outputDir: "docs/api-reference/refund-split",
+        //     },
+        //     refund: {
+        //       specPath: "openapi/refund.yml",
+        //       proxy: "https://proxy.writechoice.io/",
+        //       outputDir: "docs/api-reference/refund",
+        //     },
+        //   } 
+        // },
       ],
     ],
   
