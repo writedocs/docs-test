@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "openAPI/*.yml"
+      - "openapi/*.yml"
 
 jobs:
   reset-api-docs:
