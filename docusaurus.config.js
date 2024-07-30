@@ -7,13 +7,21 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import fs from 'fs';
 import path from 'path';
 
-function getFirstPageFromJson(filePath, sectionName) {
+function getConfigJson() {
+  const configJsonPath = path.join(__dirname, 'config.json');
+  const data = fs.readFileSync(configJsonPath, 'utf8');
+  return JSON.parse(data);
+}
+
+const configurations = getConfigJson();
+
+function getFirstPageFromJson(sectionName) {
   try {
     // Read the JSON file
-    const data = fs.readFileSync(filePath, 'utf8');
+    // const data = getConfigJson();
 
     // Parse the JSON data
-    const jsonData = JSON.parse(data).sidebar;
+    const jsonData = configurations.sidebar;
 
     // Check if the section exists in the JSON data
     if (jsonData[sectionName]) {
@@ -73,9 +81,9 @@ function createOpenApiConfig() {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Deets Docs',
-  tagline: 'Deets is an all-in-one solution designed to address challenges in legacy payment systems, such as compliance with various regulations and merchant onboarding. ',
-  favicon: 'img/favicon.ico',
+  title: configurations.websiteName,
+  tagline: configurations.description,
+  favicon: configurations.images.favicon,
 
   // Set the production url of your site here
   url: 'https://docs.digitzs.com',
@@ -85,8 +93,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'deets', // Usually your GitHub org/user name.
-  projectName: 'doc-portal-deets', // Usually your repo name.
+  organizationName: configurations.organizationName, // Usually your GitHub org/user name.
+  projectName: configurations.repositoryName, // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -146,12 +154,12 @@ const config = {
         },
       },
       // Replace with your project's social card
-      image: 'img/small-logo.png',
+      image: configurations.images.logo,
       navbar: {
         //title: 'Deets Documentation',
         logo: {
           alt: 'deets logo',
-          src: 'img/small-logo.png',
+          src: configurations.images.logo,
         },
         items: [
           {
@@ -165,7 +173,7 @@ const config = {
             position: 'left',
             label: 'Guides',
             className: 'guides_btn',
-            docId: getFirstPageFromJson('./config.json', 'docs'),
+            docId: getFirstPageFromJson('docs'),
           },
           {
             type: 'docSidebar',
