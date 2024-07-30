@@ -20,12 +20,6 @@ jobs:
         with:
           node-version: "20"
 
-      # - name: Install Dependencies
-      #   run: npm install
-
-      # - name: Run styles config script
-      #   run: npm run styles
-
       - name: Run styles config script
         run: node styles.config.js
 
@@ -34,12 +28,19 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
+          - name: Check for changes
+          id: git-status
+          run: |
+            git diff --quiet src/css/custom.css || echo "changes"
+
       - name: Commit changes
+        if: steps.git-status.outputs.changes == 'changes'
         run: |
           git add src/css/custom.css
           git commit -m "Update custom.css based on changes in config.json"
 
       - name: Push changes
+        if: steps.git-status.outputs.changes == 'changes'
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
