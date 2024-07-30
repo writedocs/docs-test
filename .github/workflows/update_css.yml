@@ -20,11 +20,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install Dependencies
-        run: npm install
+      # - name: Install Dependencies
+      #   run: npm install
+
+      # - name: Run styles config script
+      #   run: npm run styles
 
       - name: Run styles config script
-        run: npm run styles
+        run: node styles.config.js
 
       - name: Configure Git
         run: |
