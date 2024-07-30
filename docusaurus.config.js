@@ -167,7 +167,6 @@ const config = {
             className: 'guides_btn',
             docId: getFirstPageFromJson('./config.json', 'docs'),
           },
-          //{to: '/blog', label: 'Blog', position: 'left'},
           {
             type: 'docSidebar',
             position: 'left',
@@ -243,42 +242,6 @@ const config = {
       [
         "docusaurus-plugin-openapi-docs",
         createOpenApiConfig()
-        // {
-        //   id: "openapi",
-        //   docsPluginId: "classic",
-        //   config: {
-        //     authorization: {
-        //       specPath: "openapi/authorization.yml",
-        //       proxy: "https://proxy.writechoice.io/",
-        //       outputDir: "docs/api-reference/authorization",
-        //     },
-        //     merchants: {
-        //       specPath: "openapi/merchant.yml",
-        //       proxy: "https://proxy.writechoice.io/",
-        //       outputDir: "docs/api-reference/merchants",
-        //     },
-        //     payments: {
-        //       specPath: "openapi/payments.yml",
-        //       proxy: "https://proxy.writechoice.io/",
-        //       outputDir: "docs/api-reference/payments",
-        //     },
-        //     paymentsplit: {
-        //       specPath: "openapi/payment-split.yml",
-        //       proxy: "https://proxy.writechoice.io/",
-        //       outputDir: "docs/api-reference/payment-split",
-        //     },
-        //     refundSplit: {
-        //       specPath: "openapi/refund-split.yml",
-        //       proxy: "https://proxy.writechoice.io/",
-        //       outputDir: "docs/api-reference/refund-split",
-        //     },
-        //     refund: {
-        //       specPath: "openapi/refund.yml",
-        //       proxy: "https://proxy.writechoice.io/",
-        //       outputDir: "docs/api-reference/refund",
-        //     },
-        //   } 
-        // },
       ],
     ],
   
