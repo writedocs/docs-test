@@ -1,6 +1,7 @@
 {
   "styles": {
-    "mainColor": "#744ffe"
+    "mainColor": "#744ffe",
+    "secondaryColor": "#744ffe"
   },
   "sidebar": {
     "docs": [
