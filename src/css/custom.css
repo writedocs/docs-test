@@ -9,15 +9,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --ifm-color-primary: #744ffe;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --portal-primary-color1: #744ffe;
   --portal-primary-color2: #a073ff;
   --portal-primary-color3: #070a22;
@@ -31,6 +22,17 @@
   --portal-optional-color4: #555;
   --portal-highlights-color1: #ff971c;
   --portal-highlights-color2: #42ddff;
+
+  /* DOCUSAURUS MAIN CONFIGS */
+  --ifm-color-primary: #744ffe;
+  --ifm-color-primary-dark: #3201e6;
+  --ifm-color-primary-darker: #2701b3;
+  --ifm-color-primary-darkest: #1c0180;
+  --ifm-color-primary-light: #c4b4ff;
+  --ifm-color-primary-lighter: #ece7ff;
+  --ifm-color-primary-lightest: #ffffff;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-font-family-base: 'Inter', system-ui, sans-serif !important;
   /* Search bar configurations. */
   --aa-primary-color-rgb: 102, 153, 0 !important;
@@ -43,13 +45,13 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #744ffe;
+  --ifm-color-primary-dark: #3201e6;
+  --ifm-color-primary-darker: #2701b3;
+  --ifm-color-primary-darkest: #1c0180;
+  --ifm-color-primary-light: #c4b4ff;
+  --ifm-color-primary-lighter: #ece7ff;
+  --ifm-color-primary-lightest: #ffffff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
